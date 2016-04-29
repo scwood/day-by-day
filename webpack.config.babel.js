@@ -10,7 +10,7 @@ const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
 
 export default {
   entry: [
-    path.join(__dirname, 'src/client/index.js'),
+    path.join(__dirname, 'src/client/index.jsx'),
     'webpack-dev-server/client?http://0.0.0.0:8080',
     'webpack/hot/only-dev-server',
   ],
