@@ -17,9 +17,14 @@
   "author": "Spencer Wood",
   "license": "ISC",
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.15.1",
+    "emailjs": "^1.0.4",
     "express": "^4.13.4",
+    "jsonwebtoken": "^6.2.0",
     "mail-notifier": "^0.3.0",
     "mailstrip": "0.0.9",
+    "mongoose": "^4.4.16",
     "react": "^0.14.8",
     "react-dom": "^0.14.8"
   },

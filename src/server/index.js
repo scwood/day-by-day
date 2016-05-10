@@ -1,22 +1,26 @@
+import bodyParser from 'body-parser';
 import express from 'express';
-import notifier from 'mail-notifier';
-import config from './config';
+import mailNotifier from 'mail-notifier';
 import mailstrip from 'mailstrip';
+import mongoose from 'mongoose';
+import path from 'path';
+
+import config from './config';
+import routes from './routes';
 
 const app = express();
 
-const imap = {
-  user: config.email.address,
-  password: config.email.password,
-  host: 'smtp.gmail.com',
-  port: 993,
-  tls: true,
-  tlsOptions: { rejectUnauthorized: false },
-};
+app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, 'public')));
+app.use('/api', routes);
+app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
+  res.status(500).send({ error: 'There was an application error. Try again later' });
+});
 
 if (!module.parent) {
+  mongoose.connect(config.mongo.dbUrl);
+  mailNotifier(config.imap).on('mail', mail => mailstrip.body(mail)).start();
   const port = process.env.PORT || 3000;
-  notifier(imap).on('mail', mail => console.log(mailstrip(mail.text))).start();
   app.listen(port);
 }
 
