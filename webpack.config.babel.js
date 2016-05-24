@@ -10,7 +10,7 @@ const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
 
 export default {
   entry: [
-    path.join(__dirname, 'src/client/index.jsx'),
+    path.join(__dirname, 'src/client/index.js'),
     'webpack-dev-server/client?http://0.0.0.0:8080',
     'webpack/hot/only-dev-server',
   ],
@@ -31,6 +31,7 @@ export default {
     ],
   },
   devServer: {
+    historyApiFallback: true,
     proxy: {
       '/api/*': {
         target: 'http://0.0.0.0:3000',

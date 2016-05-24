@@ -27,7 +27,7 @@ class UsersController {
   }
 
   getMe(req, res) {
-    User.find({ email: req.user.email })
+    User.find({ email: req.email })
       .then((user) => {
         res.send({ user });
       });

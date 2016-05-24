@@ -14,12 +14,12 @@ function authorize(req, res, next) {
     return;
   }
   const token = parts[0];
-  jwt.verify(token, config.secret, (error, user) => {
+  jwt.verify(token, config.secret, (error, decoded) => {
     if (error) {
       res.status(400).send({ error: 'Invalid token' });
       return;
     }
-    req.user = user; // eslint-disable-line no-param-reassign
+    req.email = decoded.email; // eslint-disable-line no-param-reassign
     next();
   });
 }

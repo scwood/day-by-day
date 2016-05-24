@@ -13,7 +13,9 @@ const app = express();
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api', routes);
-app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
+app.get('*', (req, res) => res.sendFile('public/index.html', { root: __dirname }));
+app.use((error, req, res, next) => { // eslint-disable-line no-unused-vars
+  console.log(error);
   res.status(500).send({ error: 'There was an application error. Try again later' });
 });
 

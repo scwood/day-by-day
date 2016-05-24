@@ -25,7 +25,7 @@ class AuthController {
       .then((docs) => {
         if (docs.length) {
           res.status(403).send({
-            error: 'A user with that email address already exists',
+            error: 'User with that email address already exists',
           });
           return;
         }
