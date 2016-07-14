@@ -15,10 +15,10 @@ class EmailConfirmed extends Component {
     if (!token) {
       return this.setState({ error: 'Invalid or expired token' });
     }
-    return fetch('/api/user', {
+    return fetch('/api/users', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ token, email: 'asdf' }),
+      body: JSON.stringify({ token }),
     })
       .then(res => res.json())
       .then(json => {

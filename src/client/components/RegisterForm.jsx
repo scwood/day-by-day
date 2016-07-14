@@ -30,9 +30,6 @@ function RegisterForm(props) {
           placeholder="Choose a password"
           onChange={props.onPasswordChange}
         />
-        <small className="text-muted">
-          Use at least one number, one letter, and eight characters.
-        </small>
       </fieldset>
       <button className="btn btn-success btn-block" onClick={props.onRegisterClick} >
         Sign up for Day by Day

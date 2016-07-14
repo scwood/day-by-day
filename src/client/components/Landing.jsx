@@ -35,9 +35,9 @@ function Landing() {
           You can view, edit, and add journal entries at any time through the Day by Day webapp.
           <br /><br /><br />
           <h5>
-            <i className="fa fa-fw fa-google"></i> Sync your journal entries to Google Drive
+            <i className="fa fa-fw fa-dropbox"></i> Sync your journal entries to Dropbox
           </h5>
-          Add your Google Drive account to automatically backup your journal entries.
+          Add your Dropbox account to automatically backup your journal entries.
           <br /><br /><br />
           <a href="/register" className="btn btn-success">Sign up, it's free</a>
         </div>

@@ -46,7 +46,7 @@ class Register extends Component {
           this.setState({ error: json.error });
         } else {
           localStorage.setItem('token', json.token);
-          browserHistory.push('/emailSent');
+          browserHistory.push('/emailSent?email=' + encodeURIComponent(email));
         }
       });
   }

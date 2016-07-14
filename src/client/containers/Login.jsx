@@ -29,7 +29,7 @@ class Login extends Component {
   onLoginClick(event) {
     event.preventDefault();
     const { email, password } = this.state;
-    fetch('/api/user/token', {
+    fetch('/api/auth/tokens', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password }),
