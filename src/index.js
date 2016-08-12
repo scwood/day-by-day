@@ -11,18 +11,17 @@ import routes from './routes';
 const app = express();
 
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, 'public')));
+
 app.use('/api', routes);
-app.get('*', (req, res) => res.sendFile('public/index.html', { root: __dirname }));
 app.use((error, req, res, next) => { // eslint-disable-line no-unused-vars
   console.log(error);
   res.status(500).send({ error: 'There was an application error. Please try again later' });
 });
 
 if (!module.parent) {
+  const port = process.env.PORT || 80;
   mongoose.connect(config.mongo.dbUrl);
   // mailNotifier(config.imap).on('mail', mail => mailstrip.body(mail)).start();
-  const port = process.env.PORT || 3000;
   app.listen(port);
 }
 

@@ -1,50 +1,32 @@
 {
-  "name": "react-node-es6-hello-world",
-  "version": "1.0.0",
-  "description": "Starting point for react/node, includes webpack, hot loader, and airbnb eslint.",
+  "name": "day-by-day-api",
+  "version": "0.0.1",
   "repository": {
     "type": "git",
-    "url": "git://github.com/scwood/react-node-es6-hello-world.git"
+    "url": "git://github.com/scwood/day-by-day-api.git"
   },
   "scripts": {
-    "build": "webpack -p && babel src/server -d dist",
-    "lint": "eslint src --ext .js,.jsx || true",
-    "start": "npm run start:client & npm run start:server",
-    "start:client": "webpack-dev-server --progress",
-    "start:server": "nodemon src/server/index.js --exec babel-node --ignore src/client",
-    "start:production": "forever dist/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "babel src -d build",
+    "start": "nodemon src/index.js --exec babel-node || true",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:production": "npm run build && forever build/index.js"
   },
   "author": "Spencer Wood",
-  "license": "ISC",
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
-    "body-parser": "^1.15.1",
-    "emailjs": "^1.0.4",
-    "express": "^4.13.4",
-    "isomorphic-fetch": "^2.2.1",
-    "jsonwebtoken": "^6.2.0",
+    "body-parser": "^1.15.2",
+    "emailjs": "^1.0.5",
+    "express": "^4.14.0",
+    "forever": "^0.15.2",
+    "jsonwebtoken": "^7.1.6",
     "mail-notifier": "^0.3.0",
     "mailstrip": "0.0.9",
-    "mongoose": "^4.4.16",
-    "react": "^0.14.8",
-    "react-dom": "^0.14.8",
-    "react-router": "^2.4.0"
+    "nodemon": "^1.10.0"
   },
   "devDependencies": {
-    "babel-cli": "^6.6.5",
-    "babel-core": "^6.7.4",
-    "babel-loader": "^6.2.4",
-    "babel-preset-es2015": "^6.6.0",
-    "babel-preset-react": "^6.5.0",
-    "eslint": "^2.7.0",
-    "eslint-config-airbnb": "^6.2.0",
-    "eslint-plugin-react": "^4.2.3",
-    "forever": "^0.15.1",
-    "html-webpack-plugin": "^2.15.0",
-    "nodemon": "^1.9.1",
-    "react-hot-loader": "^1.3.0",
-    "webpack": "^1.12.14",
-    "webpack-dev-server": "^1.14.1"
+    "babel-cli": "^6.11.4",
+    "babel-preset-es2015": "^6.9.0",
+    "mongoose": "^4.5.7",
+    "nodemon": "^1.10.0"
   }
 }

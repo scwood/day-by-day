@@ -8,7 +8,7 @@ export default {
     tlsOptions: { rejectUnauthorized: false },
   },
   mongo: {
-    dbUrl: 'mongodb://localhost/DayByDay',
+    dbUrl: 'mongodb://daybyday:Mongopass1$@ds031845.mlab.com:31845/day-by-day',
   },
   secret: 'some secret here',
 };
