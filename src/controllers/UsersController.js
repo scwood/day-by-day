@@ -5,32 +5,45 @@ import config from '../config';
 
 class UsersController {
 
-  createUser(req, res) {
+  createUser(req, res, next) {
     const { token } = req.body;
-    jwt.verify(token, config.secret, (error, user) => {
-      if (error) {
-        res.status(400).send({ error: 'Invalid token' });
-        return;
-      }
-      User.find({ email: user.email })
-        .then((docs) => {
-          if (docs.length) {
-            res.status(400).send({ error: 'A user with that email address already exists' });
+    const tokenPromise = new Promise((resolve, reject) => {
+      jwt.verify(token, config.secret, (error, decoded) => {
+        if (error) {
+          res.status(400).send({ error: 'Invalid token' });
+          return;
+        }
+        const requiredKeys = ['email', 'password', 'name']
+        requiredKeys.forEach((key) => {
+          if (!(key in requiredKeys)) {
+            res.status(400).send({ error: 'Invalid token' });
             return;
           }
-          User.create(user)
-            .then(() => {
-              res.send({ success: true });
-            });
         });
-    });
+        User.find({ email: decoded.email })
+          .then((docs) => {
+            if (docs.length) {
+              res.status(400).send({ error: 'Invalid token' });
+              return;
+            }
+            User.create({ email: decoded.email, name: decoded.name, password: decoded.password })
+              .then((user) => {
+                res.send({ result: user });
+              })
+              .catch(next);
+          })
+          .catch(next)
+      });
+    })
+      .catch(next);
   }
 
-  getMe(req, res) {
+  getMe(req, res, next) {
     User.find({ email: req.email })
       .then((user) => {
         res.send({ user });
-      });
+      })
+      .catch(next);
   }
 
   updateMe(req, res) {

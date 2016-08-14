@@ -15,14 +15,13 @@
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.2",
-    "emailjs": "^1.0.5",
     "express": "^4.14.0",
     "forever": "^0.15.2",
     "jsonwebtoken": "^7.1.6",
     "mail-notifier": "^0.3.0",
     "mailstrip": "0.0.9",
-    "moment": "^2.14.1",
     "mongoose": "^4.5.7",
+    "nodemailer": "^2.5.0",
     "nodemon": "^1.10.0"
   },
   "devDependencies": {

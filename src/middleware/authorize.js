@@ -15,7 +15,7 @@ function authorize(req, res, next) {
   }
   const token = parts[0];
   jwt.verify(token, config.secret, (error, decoded) => {
-    if (error) {
+    if (error || !('email' in decoded)) {
       res.status(400).send({ error: 'Invalid token' });
       return;
     }

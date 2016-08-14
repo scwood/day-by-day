@@ -1,13 +1,12 @@
-import emailjs from 'emailjs';
+import nodemailer from 'nodemailer';
 import jwt from 'jsonwebtoken';
-import moment from 'moment';
 
 import User from '../models/user';
 import config from '../config';
 
 class AuthController {
 
-  createToken(req, res) {
+  createToken(req, res, next) {
     const { email, password } = req.body;
     User.findOne({ email })
       .then((user) => {
@@ -17,7 +16,8 @@ class AuthController {
         }
         const token = jwt.sign({ email }, config.secret);
         res.send({ token });
-      });
+      })
+      .catch(next);
   }
 
   sendSignUpEmail(req, res, next) {
@@ -30,22 +30,23 @@ class AuthController {
           });
           return;
         }
-        const expiresAt = moment().add(1, 'day');
         const token = jwt.sign({ email, name, password, expiresAt }, config.secret);
         const link = `${req.protocol}://${req.get('host')}/emailConfirmed?token=${token}`;
-        const from = config.emailjs.username;
-        const to = email;
-        const subject = 'Day by Day email confirmation';
-        const text = `Click the link below to confirm your email:\n${link}`;
-        const server = emailjs.server.connect(config.emailjs);
-        server.send({ from, to, subject, text }, (error) => {
+        const transporter = nodemailer.createTransport(config.nodemailer);
+        transporter.sendMail({
+          from: config.nodemailer.user,
+          to: email,
+          subject: 'Day by Day email confirmation',
+          text: `Click the link below to confirm your email:\n${link}`,
+        }, (error) => {
           if (error) {
             next(error);
             return;
           }
           res.send({ success: true });
         });
-      });
+      })
+      .catch(next);
   }
 }
 

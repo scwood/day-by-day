@@ -3,6 +3,7 @@ const emailPassword = 'Daybydaypass1$';
 const emailHost = 'smtp.gmail.com';
 
 const config = {
+  fromEmail,
   mailNotifier: {
     username: fromEmail,
     password: emailPassword,
@@ -11,13 +12,8 @@ const config = {
     tls: true,
     tlsOptions: { rejectUnauthorized: false },
   },
-  emailjs: {
-    user: fromEmail,
-    password: emailPassword,
-    host: emailHost,
-    ssl: true,
-  },
   mongo: 'mongodb://localhost',
+  nodemailer: `smtps:${fromEmail}:${emailPassword}@smtp.gmail.com`,
   secret: 'some secret here',
 };
 
