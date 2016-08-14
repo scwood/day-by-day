@@ -15,7 +15,7 @@ class AuthController {
           return;
         }
         const token = jwt.sign({ email }, config.secret);
-        res.send({ token });
+        res.send({ data: { token } });
       })
       .catch(next);
   }

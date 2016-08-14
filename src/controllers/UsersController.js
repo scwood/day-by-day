@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import jwt from 'jsonwebtoken';
 
 import User from '../models/user';
@@ -25,9 +26,13 @@ class UsersController {
               res.status(400).send({ error: 'Invalid token' });
               return;
             }
-            User.create({ email: decoded.email, name: decoded.name, password: decoded.password })
+            User.create({
+              email: decoded.email,
+              name: decoded.name,
+              password: decoded.password
+            })
               .then((user) => {
-                res.send({ result: user });
+                res.send({ data: { success: true } });
               })
               .catch(next);
           })
@@ -39,8 +44,17 @@ class UsersController {
 
   getMe(req, res, next) {
     User.find({ email: req.email })
-      .then((user) => {
-        res.send({ user });
+      .then((docs) => {
+        if (docs.length == 0) {
+          res.status(400).send({ error: 'User not found' });
+          return
+        }
+        const user = docs[0];
+        res.send({
+          data: {
+            me: _.pick(user, ['_id', 'email', 'name'])
+          }
+        });
       })
       .catch(next);
   }
