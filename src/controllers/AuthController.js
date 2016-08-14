@@ -30,7 +30,7 @@ class AuthController {
           });
           return;
         }
-        const token = jwt.sign({ email, name, password, expiresAt }, config.secret);
+        const token = jwt.sign({ email, name, password }, config.secret);
         const link = `${req.protocol}://${req.get('host')}/emailConfirmed?token=${token}`;
         const transporter = nodemailer.createTransport(config.nodemailer);
         transporter.sendMail({

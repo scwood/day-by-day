@@ -13,13 +13,12 @@ class UsersController {
           res.status(400).send({ error: 'Invalid token' });
           return;
         }
-        const requiredKeys = ['email', 'password', 'name']
-        requiredKeys.forEach((key) => {
-          if (!(key in requiredKeys)) {
-            res.status(400).send({ error: 'Invalid token' });
-            return;
-          }
-        });
+        const requiredKeys = ['email', 'password', 'name'];
+        const hasRequired = requiredKeys.every(key => key in decoded);
+        if (!hasRequired) {
+          res.status(400).send({ error: 'Invalid token' });
+          return;
+        }
         User.find({ email: decoded.email })
           .then((docs) => {
             if (docs.length) {

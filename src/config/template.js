@@ -3,6 +3,7 @@ const emailPassword = '';
 const emailHost = '';
 
 const config = {
+  fromEmail,
   mailNotifier: {
     username: fromEmail,
     password: emailPassword,
@@ -11,12 +12,8 @@ const config = {
     tls: true,
     tlsOptions: { rejectUnauthorized: false },
   },
-  emailjs: {
-    user: fromEmail,
-    password: emailPassword,
-    host: emailHost,
-  },
   mongo: '',
+  nodemailer: '',
   secret: '',
 };
 
