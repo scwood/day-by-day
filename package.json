@@ -21,6 +21,7 @@
     "jsonwebtoken": "^7.1.6",
     "mail-notifier": "^0.3.0",
     "mailstrip": "0.0.9",
+    "moment": "^2.14.1",
     "nodemon": "^1.10.0"
   },
   "devDependencies": {

@@ -1,5 +1,6 @@
 import emailjs from 'emailjs';
 import jwt from 'jsonwebtoken';
+import moment from 'moment';
 
 import User from '../models/user';
 import config from '../config';
@@ -19,7 +20,7 @@ class AuthController {
       });
   }
 
-  sendSignUpEmail(req, res) {
+  sendSignUpEmail(req, res, next) {
     const { email, name, password } = req.body;
     User.find({ email })
       .then((docs) => {
@@ -29,21 +30,17 @@ class AuthController {
           });
           return;
         }
-        const token = jwt.sign({ email, name, password }, config.secret);
+        const expiresAt = moment().add(1, 'day');
+        const token = jwt.sign({ email, name, password, expiresAt }, config.secret);
         const link = `${req.protocol}://${req.get('host')}/emailConfirmed?token=${token}`;
-        const from = config.imap.username;
+        const from = config.emailjs.username;
         const to = email;
         const subject = 'Day by Day email confirmation';
         const text = `Click the link below to confirm your email:\n${link}`;
-        const server = emailjs.server.connect({
-          user: config.imap.username,
-          password: config.imap.password,
-          host: config.imap.host,
-          ssl: true,
-        });
+        const server = emailjs.server.connect(config.emailjs);
         server.send({ from, to, subject, text }, (error) => {
           if (error) {
-            res.send({ error });
+            next(error);
             return;
           }
           res.send({ success: true });

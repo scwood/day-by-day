@@ -1,6 +1,6 @@
-const fromEmail = 'noreply.daybyday@gmail.com';
-const emailPassword = 'Daybydaypass1$';
-const emailHost = 'smtp.gmail.com';
+const fromEmail = '';
+const emailPassword = '';
+const emailHost = '';
 
 const config = {
   mailNotifier: {
@@ -15,10 +15,9 @@ const config = {
     user: fromEmail,
     password: emailPassword,
     host: emailHost,
-    ssl: true,
   },
-  mongo: 'mongodb://localhost',
-  secret: 'some secret here',
+  mongo: '',
+  secret: '',
 };
 
 export default config;

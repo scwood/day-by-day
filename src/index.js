@@ -13,15 +13,16 @@ const app = express();
 app.use(bodyParser.json());
 
 app.use('/api', routes);
-app.use((error, req, res, next) => { // eslint-disable-line no-unused-vars
+app.use((error, req, res, next) => {
   console.log(error);
   res.status(500).send({ error: 'There was an application error. Please try again later' });
 });
 
 if (!module.parent) {
   const port = process.env.PORT || 80;
-  mongoose.connect(config.mongo.dbUrl);
-  // mailNotifier(config.imap).on('mail', mail => mailstrip.body(mail)).start();
+  mongoose.Promise = global.Promise;
+  mongoose.connect(config.mongo);
+  // mailNotifier(config.mailNotifier).on('mail', mail => mailstrip.body(mail)).start();
   app.listen(port);
 }
 
