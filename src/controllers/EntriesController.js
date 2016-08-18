@@ -4,6 +4,10 @@ class EntriesContoller {
     res.sendStatus(501);
   }
 
+  getEntry(req, res) {
+    res.sendStatus(501);
+  }
+
   postEntry(req, res) {
     res.sendStatus(501);
   }

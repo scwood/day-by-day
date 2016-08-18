@@ -3,8 +3,8 @@ import { compareSync, hashSync } from 'bcrypt-nodejs';
 
 const UserSchema = new mongoose.Schema({
   email: String,
-  name: String,
   password: String,
+  emailSchedule: String,
   entries: [{
     date: Date,
     text: String,

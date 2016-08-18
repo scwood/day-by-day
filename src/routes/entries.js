@@ -7,7 +7,8 @@ const router = new Router();
 
 router.route('/')
   .get(controller.getEntries);
-router.route('/:entryId')
+router.route('/:id')
+  .get(controller.getEntry)
   .post(controller.postEntry)
   .patch(controller.patchEntry);
 
