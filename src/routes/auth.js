@@ -9,6 +9,6 @@ const router = new Router();
 router.route('/tokens')
   .post(checkForParams(['email', 'password']), controller.createToken);
 router.route('/signUpEmail')
-  .post(checkForParams(['email', 'name', 'password']), controller.sendSignUpEmail);
+  .post(checkForParams(['email', 'password']), controller.sendSignUpEmail);
 
 export default router;
