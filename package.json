@@ -23,7 +23,8 @@
     "mailstrip": "0.0.9",
     "mongoose": "^4.5.7",
     "nodemailer": "^2.5.0",
-    "nodemon": "^1.10.0"
+    "nodemon": "^1.10.0",
+    "validator": "^5.5.0"
   },
   "devDependencies": {
     "babel-cli": "^6.11.4",
