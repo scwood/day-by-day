@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 app.use('/api', routes);
 app.use((error, req, res, next) => {
   console.log(error);
-  res.status(500).send({ error: 'Internal server error. Please try again later' });
+  res.status(500).send({ error: 'Internal server error. Please try again later.' });
 });
 
 if (!module.parent) {
