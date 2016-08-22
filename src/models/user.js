@@ -11,9 +11,6 @@ const UserSchema = new mongoose.Schema({
   }],
 });
 
-UserSchema.pre('save', hashPasswordIfModified);
-UserSchema.methods.comparePassword = comparePassword;
-
 function hashPasswordIfModified(next) {
   if (!this.isModified('password')) {
     return next();
@@ -25,5 +22,9 @@ function hashPasswordIfModified(next) {
 function comparePassword(password) {
   return compareSync(password, this.password);
 }
+
+UserSchema.pre('save', hashPasswordIfModified);
+UserSchema.methods.comparePassword = comparePassword;
+
 
 export default mongoose.model('User', UserSchema);
