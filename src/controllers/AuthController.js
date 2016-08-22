@@ -1,5 +1,6 @@
-import nodemailer from 'nodemailer';
 import jwt from 'jsonwebtoken';
+import nodemailer from 'nodemailer';
+import validator from 'validator';
 
 import User from '../models/user';
 import config from '../config';
@@ -27,6 +28,12 @@ class AuthController {
         if (docs.length) {
           res.status(403).send({
             error: 'User with that email address already exists',
+          });
+          return;
+        }
+        if (!validator.isEmail(email)) {
+          res.status(400).send({
+            error: 'Email address is invalid',
           });
           return;
         }
