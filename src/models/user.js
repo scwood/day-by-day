@@ -26,5 +26,8 @@ function comparePassword(password) {
 UserSchema.pre('save', hashPasswordIfModified);
 UserSchema.methods.comparePassword = comparePassword;
 
+const User = mongoose.models.User ?
+  mongoose.model('User') :
+  mongoose.model('User', UserSchema);
 
-export default mongoose.model('User', UserSchema);
+export default User;
