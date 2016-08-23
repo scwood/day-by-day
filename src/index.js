@@ -17,9 +17,10 @@ app.use((error, req, res, next) => {
   next();
 });
 
+mongoose.Promise = global.Promise;
+
 if (!module.parent) {
   const port = process.env.PORT || 80;
-  mongoose.Promise = global.Promise;
   mongoose.connect(config.mongo);
   // mailNotifier(config.mailNotifier).on('mail', mail => mailstrip.body(mail)).start();
   app.listen(port);

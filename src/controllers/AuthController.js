@@ -26,15 +26,11 @@ class AuthController {
     User.find({ email })
       .then((docs) => {
         if (docs.length) {
-          res.status(403).send({
-            error: 'User with that email address already exists',
-          });
+          res.status(403).send({ error: 'User with that email address already exists' });
           return;
         }
         if (!validator.isEmail(email)) {
-          res.status(400).send({
-            error: 'Email address is invalid',
-          });
+          res.status(400).send({ error: 'Email address is invalid' });
           return;
         }
         const token = jwt.sign({ email, name, password }, config.secret);
