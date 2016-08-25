@@ -37,6 +37,7 @@
     "mocha": "^3.0.2",
     "mockgoose": "^6.0.6",
     "nodemon": "^1.10.2",
+    "sinon": "^1.17.5",
     "supertest": "^2.0.0"
   }
 }

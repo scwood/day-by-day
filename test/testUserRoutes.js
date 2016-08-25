@@ -52,7 +52,7 @@ describe('User routes', () => {
     });
   });
 
-  describe(`POST ${meUri}`, () => {
+  describe(`GET ${meUri}`, () => {
     it('should 401 on missing authorization header', done => {
       supertest(app)
         .get(meUri)
