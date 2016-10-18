@@ -1,7 +1,6 @@
-name = day-by-day-api
-portOptions = 3002:80
-hostPort = 3002
-containerPort = 80
+name = day-by-day
+hostPort = 3001
+containerPort = 3001
 
 stop:
 	docker stop $(name) || true
