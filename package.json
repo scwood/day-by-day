@@ -1,9 +1,9 @@
 {
-  "name": "day-by-day",
-  "author": "Spencer Wood",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/scwood/day-by-day.git"
+  "eslintConfig": {
+    "extends": "airbnb-base"
+  },
+  "babel": {
+    "presets": ["es2015"] 
   },
   "scripts": {
     "build": "npm run build:server && npm run build:client",
@@ -13,6 +13,7 @@
     "start:server": "nodemon --exec babel-node server/index.js",
     "start:client": "cd client && npm start",
     "start:production": "npm run build && forever build/index.js",
+    "lint": "eslint server",
     "test": "mocha --compilers js:babel-register"
   },
   "dependencies": {
