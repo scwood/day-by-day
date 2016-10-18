@@ -2,8 +2,8 @@ import jwt from 'jsonwebtoken';
 import supertest from 'supertest';
 
 import './fixtures/setUpMockedDb';
-import app from '../src';
-import config from '../src/config';
+import app from '../server';
+import config from '../server/config';
 
 const usersUri = '/api/users';
 const meUri = `${usersUri}/me`;

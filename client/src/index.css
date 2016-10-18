@@ -1,0 +1,8 @@
+.dark-link {
+  color: rgba(0, 0, 0, 0.8) !important;
+}
+
+.dark-link:hover {
+  color: rgba(0, 0, 0, 0.8);
+  text-decoration: none;
+}

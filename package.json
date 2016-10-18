@@ -6,9 +6,10 @@
     "url": "git://github.com/scwood/day-by-day-api.git"
   },
   "scripts": {
-    "build": "babel src -d build",
-    "lint": "eslint src test",
-    "start": "nodemon --exec babel-node src/index.js",
+    "build": "npm run build:server && npm run build:client",
+    "build:server": "babel server -d build",
+    "build:client": "cd client && npm run build && cd ..",
+    "start": "nodemon --exec babel-node server/index.js & cd client && npm start",
     "start:production": "npm run build && forever build/index.js",
     "test": "mocha --compilers js:babel-register",
     "test:watch": "npm test -- --watch"
