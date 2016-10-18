@@ -1,20 +1,20 @@
 {
-  "name": "day-by-day-api",
-  "version": "0.0.1",
+  "name": "day-by-day",
+  "author": "Spencer Wood",
   "repository": {
     "type": "git",
-    "url": "git://github.com/scwood/day-by-day-api.git"
+    "url": "git://github.com/scwood/day-by-day.git"
   },
   "scripts": {
     "build": "npm run build:server && npm run build:client",
     "build:server": "babel server -d build",
     "build:client": "cd client && npm run build && cd ..",
-    "start": "nodemon --exec babel-node server/index.js & cd client && npm start",
+    "start": "npm run start:server & npm run start:client",
+    "start:server": "nodemon --exec babel-node server/index.js",
+    "start:client": "cd client && npm start",
     "start:production": "npm run build && forever build/index.js",
-    "test": "mocha --compilers js:babel-register",
-    "test:watch": "npm test -- --watch"
+    "test": "mocha --compilers js:babel-register"
   },
-  "author": "Spencer Wood",
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.2",

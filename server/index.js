@@ -25,7 +25,7 @@ app.use((error, req, res, next) => {
 mongoose.Promise = global.Promise;
 
 if (!module.parent) {
-  const port = process.env.SERVER_PORT || 80;
+  const port = process.env.PORT || 3001;
   mongoose.connect(config.mongo);
   // mailNotifier(config.mailNotifier).on('mail', mail => mailstrip.body(mail)).start();
   app.listen(port);
