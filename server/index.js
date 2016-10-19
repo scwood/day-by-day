@@ -1,9 +1,9 @@
 import bodyParser from 'body-parser';
 import express from 'express';
-import path from 'path';
 // import mailNotifier from 'mail-notifier';
 // import mailstrip from 'mailstrip';
 import mongoose from 'mongoose';
+import path from 'path';
 
 import config from './config';
 import routes from './routes';
@@ -26,7 +26,7 @@ mongoose.Promise = global.Promise;
 
 if (!module.parent) {
   const port = process.env.PORT || 3001;
-  mongoose.connect(config.mongo);
+  mongoose.connect(config.mongoHost);
   // mailNotifier(config.mailNotifier).on('mail', mail => mailstrip.body(mail)).start();
   app.listen(port);
 }

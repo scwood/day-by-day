@@ -1,9 +1,18 @@
+// environment specific variables
+
+let mongoHost = '';
 const fromEmail = '';
 const emailPassword = '';
 const emailHost = '';
+const secret = '';
+
+if (process.env.NODE_ENV === 'production') {
+  mongoHost = '';
+}
 
 const config = {
-  fromEmail,
+  secret,
+  mongoHost,
   mailNotifier: {
     username: fromEmail,
     password: emailPassword,
@@ -12,9 +21,7 @@ const config = {
     tls: true,
     tlsOptions: { rejectUnauthorized: false },
   },
-  mongo: '',
-  nodemailer: '',
-  secret: '',
+  nodemailer: `smtps://${fromEmail}:${emailPassword}@${emailHost}`,
 };
 
 export default config;
