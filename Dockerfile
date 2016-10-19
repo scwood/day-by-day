@@ -14,8 +14,6 @@ RUN cd ..
 COPY . /app
 RUN npm run build
 
-# NEED TO INSTALL NODE MODULES IN CLINET
-
 EXPOSE 3001
 ENV NODE_ENV production
 CMD ["npm", "run", "start:production"]
