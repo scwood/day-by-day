@@ -3,7 +3,7 @@ import React from 'react';
 
 function Landing() {
   return (
-    <div className="container m-t-3 m-b-3" style={{ maxWidth: 700 }}>
+    <div className="container mt-3 mb-3" style={{ maxWidth: 700 }}>
       <nav className="navbar navbar-light">
         <Link  className="navbar-brand" to="/landing">
           <i className="fa fa-book"></i> Day by Day
@@ -21,7 +21,7 @@ function Landing() {
         </ul>
       </nav>
       <div className="row">
-        <div className="col-xs-12 m-t-3 p-l-2 p-r-2">
+        <div className="col-xs-12 mt-3 pl-2 pr-2">
           <h1 className="display-4">Journaling made easy</h1>
           <hr /><br />
           <h5>

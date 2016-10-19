@@ -4,12 +4,10 @@ MAINTAINER Spencer Wood <spencercwood@gmail.com>
 WORKDIR /app
 
 COPY package.json /app/package.json
-RUN npm install
+RUN npm install 
 
 COPY client/package.json /app/client/package.json
-RUN cd client
-RUN npm install
-RUN cd ..
+RUN cd client && npm install
 
 COPY . /app
 RUN npm run build
