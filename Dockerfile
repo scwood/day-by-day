@@ -6,9 +6,15 @@ WORKDIR /app
 COPY package.json /app/package.json
 RUN npm install
 
-COPY server /app/server
-COPY client /app/client
+COPY client/package.json /app/client/package.json
+RUN cd client
+RUN npm install
+RUN cd ..
+
+COPY . /app
 RUN npm run build
+
+# NEED TO INSTALL NODE MODULES IN CLINET
 
 EXPOSE 3001
 ENV NODE_ENV production
