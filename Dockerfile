@@ -10,6 +10,7 @@ RUN yarn
 
 COPY server /app/server
 COPY client /app/client
+RUN npm run build
 
 EXPOSE 3001
 ENV NODE_ENV production
