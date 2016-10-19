@@ -1,9 +1,16 @@
 FROM node
-
-EXPOSE 80
+MAINTAINER Spencer Wood <spencercwood@gmail.com>
 
 WORKDIR /app
-ADD . /app
 
-RUN npm install
+COPY package.json /app/package.json
+COPY yarn.lock /app/yarn.lock
+RUN npm install -g yarn
+RUN yarn
+
+COPY server /app/server
+COPY client /app/client
+
+EXPOSE 3001
+ENV NODE_ENV production
 CMD ["npm", "run", "start:production"]
