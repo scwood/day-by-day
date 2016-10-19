@@ -4,9 +4,7 @@ MAINTAINER Spencer Wood <spencercwood@gmail.com>
 WORKDIR /app
 
 COPY package.json /app/package.json
-COPY yarn.lock /app/yarn.lock
-RUN npm install -g yarn
-RUN yarn
+RUN npm install
 
 COPY server /app/server
 COPY client /app/client
