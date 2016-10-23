@@ -1,7 +1,4 @@
 {
-  "eslintConfig": {
-    "extends": "airbnb-base"
-  },
   "babel": {
     "presets": ["es2015"] 
   },
@@ -13,8 +10,7 @@
     "start:server": "nodemon --exec babel-node server/index.js",
     "start:client": "cd client && npm start",
     "start:production": "forever build/index.js",
-    "lint": "eslint server",
-    "test": "mocha --compilers js:babel-register"
+    "test": "mocha --compilers js:babel-register server/__tests__"
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
