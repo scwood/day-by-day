@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import 'font-awesome/css/font-awesome.css';
 import React from 'react';
-import { browserHistory, Route, Router } from 'react-router';
+import { browserHistory, Route, Router, Redirect } from 'react-router';
 import { render } from 'react-dom';
 
 import './index.css';
@@ -40,7 +40,7 @@ const routes = (
         <Route path="/emailConfirmed" component={EmailConfirmed} />
       </Route>
     </Route>
-    <Route path="*" component={() => <div>404</div>} />
+    <Redirect from="*" to="/" />
   </Router>
 );
 
