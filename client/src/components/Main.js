@@ -15,7 +15,7 @@ class Home extends Component {
   componentWillMount() {
     const token = localStorage.getItem('token');
     if (token === null) {
-      browserHistory.push('/landing');
+      browserHistory.replace('/landing');
       return;
     }
     fetch('/api/users/me', {
@@ -23,7 +23,7 @@ class Home extends Component {
     })
       .then(res => {
         if (res.status === 401) {
-          browserHistory.push('/landing');
+          browserHistory.replace('/landing');
           return;
         }
         res.json()
