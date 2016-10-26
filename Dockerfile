@@ -9,8 +9,7 @@ RUN npm install
 COPY client/package.json /app/client/package.json
 RUN cd client && npm install
 
-COPY server /app/server
-COPY client /app/client
+COPY . /app
 RUN npm run build
 
 EXPOSE 3001
