@@ -1,10 +1,10 @@
 function checkForParams(required) {
   return function _checkForParams(req, res, next) {
-    const missing = [];
-    required.forEach((param) => {
+    const missing = required.filter(param => {
       if (!req.body[param]) {
-        missing.push(param);
+        return true;
       }
+      return false;
     });
     if (missing.length === 0) {
       next();
