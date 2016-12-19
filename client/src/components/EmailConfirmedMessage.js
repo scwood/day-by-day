@@ -6,7 +6,9 @@ function EmailConfirmedMessage({ error }) {
   if (error) {
     message = <div className="alert alert-danger">{error}</div>;
   } else {
-    message = <p>Email confirmed <i className="fa fa-check text-success"></i></p>;
+    message = (
+      <p>Email confirmed <i className="fa fa-check text-success"></i></p>
+    );
   }
   return (
     <div>

@@ -1,16 +1,26 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
+
+Header.propTypes = {
+  email: PropTypes.string.isRequired,
+};
 
 function Header({ email }) {
   const signOut = (
-    <a className="dark-link nav-link dropdown-toggle" data-toggle="dropdown" href="">
+    <a
+      className="dark-link nav-link dropdown-toggle"
+      data-toggle="dropdown"
+      href=""
+    >
       {email}
     </a>
-  )
+  );
   return (
     <div>
       <nav className="navbar navbar-light navbar-fixed-top bg-faded">
-        <a className="navbar-brand" href="#"><i className="fa fa-fw fa-book"></i> Day by Day</a>
+        <a className="navbar-brand" href="#">
+          <i className="fa fa-fw fa-book"></i> Day by Day
+        </a>
         <ul className="nav navbar-nav pull-xs-right">
           <li className="nav-item dropdown">
             {email && signOut}

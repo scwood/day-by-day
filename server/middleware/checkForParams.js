@@ -12,7 +12,9 @@ function checkForParams(required) {
       res.status(400).send({ error: `Missing required value: ${missing[0]}` });
     } else {
       const missingString = missing.join(', ');
-      res.status(400).send({ error: `Missing required values: ${missingString}` });
+      res.status(400).send({
+        error: `Missing required values: ${missingString}`
+      });
     }
   };
 }

@@ -9,7 +9,9 @@ function authenticate(req, res, next) {
   }
   const authHeader = req.headers.authorization;
   const parts = authHeader.split(' ');
-  if (parts.length < 2 || parts.length > 2 || parts.shift().toLowerCase() !== 'bearer') {
+  if (parts.length < 2 ||
+      parts.length > 2 ||
+      parts.shift().toLowerCase() !== 'bearer') {
     res.status(401).send({ error: 'Invalid authorization header format' });
     return;
   }
@@ -19,7 +21,7 @@ function authenticate(req, res, next) {
       res.status(401).send({ error: 'Invalid authorization token' });
       return;
     }
-    req.email = decoded.email; // eslint-disable-line no-param-reassign
+    req.email = decoded.email;
     next();
   });
 }

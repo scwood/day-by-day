@@ -9,7 +9,7 @@ class Home extends Component {
     super();
     this.state = {
       email: null
-    }
+    };
   }
 
   async componentWillMount() {
@@ -27,7 +27,7 @@ class Home extends Component {
         return;
       }
       const json = await result.json();
-      this.setState({ email: json.data.me })
+      this.setState({ email: json.data.me });
     } catch (error) {
       console.log(error);
     }

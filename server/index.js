@@ -17,8 +17,10 @@ app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '..', 'client', 'build', 'index.html'));
 });
 app.use((error, req, res, next) => {
-  console.log(error); // eslint-disable-line no-console
-  res.status(500).send({ error: 'Internal server error. Please try again later.' });
+  console.log(error);
+  res.status(500).send({
+    error: 'Internal server error. Please try again later.'
+  });
   next();
 });
 
@@ -27,7 +29,9 @@ mongoose.Promise = global.Promise;
 if (!module.parent) {
   const port = process.env.PORT || 3001;
   mongoose.connect(config.mongoHost);
-  // mailNotifier(config.mailNotifier).on('mail', mail => mailstrip.body(mail)).start();
+  // mailNotifier(config.mailNotifier).on('mail', mail => {
+  //   mailstrip.body(mail);
+  // }).start();
   app.listen(port);
 }
 

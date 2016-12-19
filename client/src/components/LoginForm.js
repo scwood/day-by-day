@@ -1,7 +1,9 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 
-function LoginForm({ email, password, error, onEmailChange, onPasswordChange, onLoginClick }) {
+function LoginForm({
+  email, password, error, onEmailChange, onPasswordChange, onLoginClick
+}) {
   return (
     <form>
       {error && <div className="alert alert-danger">{error}</div>}

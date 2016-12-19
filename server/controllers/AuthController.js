@@ -45,7 +45,7 @@ class AuthController {
         to: email,
         subject: 'Day by Day email confirmation',
         text: `Click the link below to confirm your email:\n${link}`,
-      })
+      });
       res.send({ success: true });
     } catch (error) {
       next(error);

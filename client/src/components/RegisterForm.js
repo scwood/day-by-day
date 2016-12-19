@@ -26,7 +26,10 @@ function RegisterForm(props) {
         />
       </fieldset>
       <hr />
-      <button className="btn btn-success btn-block" onClick={props.onRegisterClick} >
+      <button
+        className="btn btn-success btn-block"
+        onClick={props.onRegisterClick}
+      >
         Sign up for Day by Day
       </button>
     </form>
