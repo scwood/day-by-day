@@ -9,12 +9,13 @@ import config from './config';
 import routes from './routes';
 
 const app = express();
+const publicPath = path.resolve(__dirname, '..', '..', 'client', 'build');
 
 app.use(bodyParser.json());
-app.use(express.static(path.resolve(__dirname, '..', 'client', 'build')));
+app.use(express.static(publicPath));
 app.use('/api', routes);
 app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '..', 'client', 'build', 'index.html'));
+  res.sendFile(path.resolve(publicPath, 'index.html'));
 });
 app.use((error, req, res, next) => {
   console.log(error);

@@ -12,10 +12,10 @@
     "build:server": "babel server -d build",
     "build:client": "cd client && npm run build && cd ..",
     "start": "npm run start:server & npm run start:client",
-    "start:server": "nodemon --exec babel-node server/index.js",
+    "start:server": "nodemon --exec babel-node server/src/index.js",
     "start:client": "cd client && npm start",
-    "start:production": "forever build/index.js",
-    "test": "mocha --compilers js:babel-register server/__tests__"
+    "start:production": "forever build/src/index.js",
+    "test": "mocha --compilers js:babel-register server/tests"
   },
   "dependencies": {
     "babel-runtime": "^6.20.0",
