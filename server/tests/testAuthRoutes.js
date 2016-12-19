@@ -50,10 +50,9 @@ describe('Auth routes', () => {
   describe(`POST ${signUpEmailUri}`, () => {
     before(() => {
       sinon.stub(nodemailer, 'createTransport', () => {
-        const transporter = { sendMail: (options, callback) => callback() };
+        const transporter = { sendMail: options => Promise.resolve() };
         return transporter;
-      }
-      );
+      });
     });
 
     after(() => {
