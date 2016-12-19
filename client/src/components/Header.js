@@ -1,10 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 
-Header.propTypes = {
-  email: PropTypes.string.isRequired,
-};
-
 function Header({ email }) {
   const signOut = (
     <a
@@ -34,5 +30,9 @@ function Header({ email }) {
     </div>
   );
 }
+
+Header.propTypes = {
+  email: PropTypes.string
+};
 
 export default Header;
