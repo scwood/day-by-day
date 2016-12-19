@@ -12,25 +12,25 @@ class Home extends Component {
     }
   }
 
-  componentWillMount() {
+  async componentWillMount() {
     const token = localStorage.getItem('token');
     if (token === null) {
       browserHistory.replace('/landing');
       return;
     }
-    fetch('/api/users/me', {
-      headers: { 'authorization': `bearer ${token}` }
-    })
-      .then(res => {
-        if (res.status === 401) {
-          browserHistory.replace('/landing');
-          return;
-        }
-        res.json()
-          .then(json => {
-            this.setState({ email: json.data.me })
-          })
-      })
+    try {
+      const result = await fetch('/api/users/me', {
+        headers: { 'authorization': `bearer ${token}` }
+      });
+      if (result.status === 401) {
+        browserHistory.replace('/landing');
+        return;
+      }
+      const json = await result.json();
+      this.setState({ email: json.data.me })
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   render() {

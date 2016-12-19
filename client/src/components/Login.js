@@ -26,23 +26,25 @@ class Login extends Component {
     this.setState({ password: event.target.value });
   }
 
-  handleLoginClick(event) {
+  async handleLoginClick(event) {
     event.preventDefault();
     const { email, password } = this.state;
-    fetch('/api/auth/tokens', {
-      method: 'post',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ email, password }),
-    })
-      .then(res => res.json())
-      .then(json => {
-        if ('error' in json) {
-          this.setState({ error: json.error, password: '' });
-        } else {
-          localStorage.setItem('token', json.data.token);
-          browserHistory.push('/');
-        }
+    try {
+      const result = await fetch('/api/auth/tokens', {
+        method: 'post',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ email, password }),
       });
+      const json = await result.json();
+      if ('error' in json) {
+        this.setState({ error: json.error, password: '' });
+      } else {
+        localStorage.setItem('token', json.data.token);
+        browserHistory.push('/');
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   render() {

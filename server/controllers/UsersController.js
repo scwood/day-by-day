@@ -5,55 +5,59 @@ import config from '../config';
 
 class UsersController {
 
-  createUser(req, res, next) {
+  async createUser(req, res, next) {
+
     function notifyInvalidToken() {
       res.status(400).send({ error: 'Invalid token' });
     }
+
     const { token } = req.body;
-    jwt.verify(token, config.secret, (error, decoded) => {
-      if (error) {
-        notifyInvalidToken();
+    let decoded;
+    try {
+      decoded = jwt.verify(token, config.secret);
+    } catch (error) {
+      notifyInvalidToken();
+      return;
+    }
+    const requiredKeys = ['email', 'password'];
+    const hasRequired = requiredKeys.every(key => key in decoded);
+    if (!hasRequired) {
+      notifyInvalidToken();
+      return;
+    }
+    try {
+      const docs = await User.find({ email: decoded.email });
+      if (docs.length) {
+        res.status(403).send({
+          error: 'User with that email address already exists'
+        });
         return;
       }
-      const requiredKeys = ['email', 'password'];
-      const hasRequired = requiredKeys.every(key => key in decoded);
-      if (!hasRequired) {
-        notifyInvalidToken();
-        return;
-      }
-      User.find({ email: decoded.email })
-        .then(docs => {
-          if (docs.length) {
-            res.status(403).send({ error: 'User with that email address already exists' });
-            return;
-          }
-          User.create({
-            email: decoded.email,
-            name: decoded.name,
-            password: decoded.password,
-          })
-            .then(() => {
-              res.send({ data: { success: true } });
-            })
-            .catch(next);
-        })
-        .catch(next);
-    });
+      await User.create({
+        email: decoded.email,
+        name: decoded.name,
+        password: decoded.password,
+      });
+      res.send({ data: { success: true } });
+    } catch (error) {
+      next(error);
+    }
   }
 
-  getMe(req, res, next) {
-    User.find({ email: req.email })
-      .then(docs => {
-        if (docs.length === 0) {
-          res.status(400).send({ error: 'User not found' });
-          return;
-        }
-        const user = docs[0];
-        res.send({
-          data: { me: user.email },
-        });
-      })
-      .catch(next);
+  async getMe(req, res, next) {
+    try {
+      const docs = await User.find({ email: req.email });
+      if (docs.length === 0) {
+        res.status(400).send({ error: 'User not found' });
+        return;
+      }
+      const user = docs[0];
+      res.send({
+        data: { me: user.email },
+      });
+    } catch (error) {
+      next(error);
+    }
   }
 
   updateMe(req, res) {

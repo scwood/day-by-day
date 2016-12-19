@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import fetch from 'isomorphic-fetch';
-import { browserHistory } from 'react-router';
-
+import { browserHistory } from 'react-router'; 
 import RegisterForm from '../components/RegisterForm';
 
 class Register extends Component {
@@ -26,22 +25,24 @@ class Register extends Component {
     this.setState({ password: event.target.value });
   }
 
-  handleRegisterClick(event) {
+  async handleRegisterClick(event) {
     event.preventDefault();
     const { email, password } = this.state;
-    fetch('/api/auth/signUpEmail', {
-      method: 'post',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ email, password }),
-    })
-      .then(res => res.json())
-      .then(json => {
-        if ('error' in json) {
-          this.setState({ error: json.error, password: '' });
-        } else {
-          browserHistory.push('/emailSent?email=' + encodeURIComponent(email));
-        }
+    try {
+      const response = await fetch('/api/auth/signUpEmail', {
+        method: 'post',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ email, password }),
       });
+      const json = await response.json();
+      if ('error' in json) {
+        this.setState({ error: json.error, password: '' });
+      } else {
+        browserHistory.push('/emailSent?email=' + encodeURIComponent(email));
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   render() {

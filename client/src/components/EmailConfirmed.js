@@ -10,22 +10,24 @@ class EmailConfirmed extends Component {
     this.state = { error: null };
   }
 
-  componentWillMount() {
+  async componentWillMount() {
     const { token } = this.props.location.query;
     if (!token) {
       this.setState({ error: 'Missing token' });
     }
-    fetch('/api/users', {
-      method: 'post',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ token }),
-    })
-      .then(res => res.json())
-      .then(json => {
-        if ('error' in json) {
-          this.setState({ error: json.error });
-        }
+    try {
+      const response = await fetch('/api/users', {
+        method: 'post',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ token }),
       });
+      const json = await response.json();
+      if ('error' in json) {
+        this.setState({ error: json.error });
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   render() {
