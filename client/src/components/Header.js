@@ -6,8 +6,7 @@ function Header({ email }) {
     <a
       className="dark-link nav-link dropdown-toggle"
       data-toggle="dropdown"
-      href=""
-    >
+      href="">
       {email}
     </a>
   );

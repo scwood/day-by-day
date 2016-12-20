@@ -3,7 +3,7 @@ import React, { PropTypes } from 'react';
 
 function Auth(props) {
   return (
-    <div className="container mt-3" style={{ maxWidth: 400 }}>
+    <div className="container" style={{ maxWidth: 400, marginTop: 65 }}>
       <h3 style={{ fontWeight: 'normal' }}>
         <Link to="/" className="dark-link">
           <i className="fa fa-book"></i> Day by Day
