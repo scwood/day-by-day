@@ -7,7 +7,7 @@ function Auth(props) {
       <h3 style={{ fontWeight: 'normal' }}>
         <Link to="/" className="dark-link">
           <i className="fa fa-book"></i> Day by Day
-      </Link>
+        </Link>
       </h3>
       <hr />
       {props.children}
