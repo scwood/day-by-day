@@ -1,6 +1,8 @@
 FROM mhart/alpine-node:7.3
 MAINTAINER Spencer Wood <spencercwood@gmail.com>
 
+EXPOSE 3001
+
 WORKDIR /app
 
 COPY package.json /app/package.json
@@ -12,6 +14,4 @@ RUN cd client && npm install
 COPY . /app
 RUN npm run build
 
-EXPOSE 3001
-ENV NODE_ENV production
 CMD ["npm", "run", "start:production"]
