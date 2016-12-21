@@ -1,4 +1,4 @@
-FROM node
+FROM mhart/alpine-node:7.3
 MAINTAINER Spencer Wood <spencercwood@gmail.com>
 
 WORKDIR /app
