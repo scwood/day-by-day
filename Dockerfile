@@ -1,5 +1,4 @@
 FROM mhart/alpine-node:7.3
-MAINTAINER Spencer Wood <spencercwood@gmail.com>
 
 EXPOSE 3001
 
@@ -11,7 +10,8 @@ RUN npm install
 COPY client/package.json /app/client/package.json
 RUN cd client && npm install
 
-COPY . /app
+COPY server/src /app/server/
+COPY client/src client/public /app/client/
 RUN npm run build
 
 CMD ["npm", "run", "start:production"]
