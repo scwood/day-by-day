@@ -7,8 +7,8 @@ const controller = new AuthController();
 const router = new Router();
 
 router.route('/tokens')
-  .post(checkForParams(['email', 'password']), controller.createToken);
+  .post(checkForParams(['email', 'password']), controller.postToken);
 router.route('/signUpEmail')
-  .post(checkForParams(['email', 'password']), controller.sendSignUpEmail);
+  .post(checkForParams(['email', 'password']), controller.postSignUpEmail);
 
 export default router;

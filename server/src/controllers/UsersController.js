@@ -5,7 +5,7 @@ import config from '../config';
 
 class UsersController {
 
-  async createUser(req, res, next) {
+  async postUser(req, res, next) {
 
     function notifyInvalidToken() {
       res.status(400).send({ error: 'Invalid token' });
@@ -38,7 +38,7 @@ class UsersController {
         name: decoded.name,
         password: decoded.password,
       });
-      res.send({ data: { success: true } });
+      res.status(201).send({ data: { success: true } });
     } catch (error) {
       next(error);
     }
@@ -60,7 +60,7 @@ class UsersController {
     }
   }
 
-  updateMe(req, res) {
+  patchMe(req, res) {
     res.sendStatus(501);
   }
 }

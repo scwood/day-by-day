@@ -7,7 +7,7 @@ import config from '../config';
 
 class AuthController {
 
-  async createToken(req, res, next) {
+  async postToken(req, res, next) {
     const { email, password } = req.body;
     try {
       const user = await User.findOne({ email });
@@ -16,13 +16,13 @@ class AuthController {
         return;
       }
       const token = jwt.sign({ email }, config.secret);
-      res.send({ data: { token } });
+      res.status(201).send({ data: { token } });
     } catch (error) {
       next(error);
     }
   }
 
-  async sendSignUpEmail(req, res, next) {
+  async postSignUpEmail(req, res, next) {
     const { email, name, password } = req.body;
     try {
       const docs = await User.find({ email });
@@ -46,7 +46,7 @@ class AuthController {
         subject: 'Day by Day email confirmation',
         text: `Click the link below to confirm your email:\n${link}`,
       });
-      res.send({ success: true });
+      res.status(201).send({ success: true });
     } catch (error) {
       next(error);
     }
