@@ -1,9 +1,0 @@
-.git*
-.dockerignore
-Dockerfile
-Makefile
-README.md
-build
-client/build
-node_modules
-client/node_modules
