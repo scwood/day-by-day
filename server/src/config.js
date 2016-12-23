@@ -1,21 +1,21 @@
-const mongoHost = process.env.DAY_BY_DAY_DB;
-const fromEmail = process.env.DAY_BY_DAY_EMAIL;
-const emailPassword = process.env.DAY_BY_DAY_EMAIL_PASSWORD;
-const emailHost = process.env.DAY_BY_DAY_EMAIL_HOST;
-const secret = process.env.DAY_BY_DAY_SECRET;
+const secret = process.env.SECRET;
+const mongoHost = process.env.MONGO_HOST;
+const emailAddress = process.env.EMAIL_ADDRESS;
+const emailPassword = process.env.EMAIL_PASSWORD;
+const emailHost = process.env.EMAIL_HOST;
 
 const config = {
   secret,
   mongoHost,
   mailNotifier: {
-    username: fromEmail,
+    username: emailAddress,
     password: emailPassword,
     host: emailHost,
     port: 993,
     tls: true,
     tlsOptions: { rejectUnauthorized: false },
   },
-  nodemailer: `smtps://${fromEmail}:${emailPassword}@${emailHost}`,
+  nodemailer: `smtps://${emailAddress}:${emailPassword}@${emailHost}`,
 };
 
 export default config;

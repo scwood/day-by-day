@@ -3,3 +3,7 @@ services:
   - docker
   - mongodb
 language: node_js
+node_js: 6
+# env:
+#   - MONGO_HOST=localhost
+#   - EMAIL_ADDRESS=test@email.com
