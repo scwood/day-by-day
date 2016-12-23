@@ -5,9 +5,12 @@ services:
 language: node_js
 node_js: 6
 env:
-  - MONGO_HOST=localhost
-  - EMAIL_ADDRESS=noreply.daybyday@gmail.com
-  - EMAIL_HOST=smtp.gmail.com  
+  global:
+    - MONGO_HOST=localhost
+    - EMAIL_ADDRESS=noreply.daybyday@gmail.com
+    - EMAIL_HOST=smtp.gmail.com  
 script:
-  - echo $TESTVAR
-  - echo $MONGO_HOST
+  # - npm test
+  # - docker build -t scwood/day-by-day .
+  # - docker 
+  - docker ps | grep -q day-by-day
