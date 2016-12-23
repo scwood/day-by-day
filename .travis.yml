@@ -12,9 +12,9 @@ env:
     - EMAIL_HOST=smtp.gmail.com  
 script:
   - npm test
-  # - docker build -t scwood/day-by-day .
-  # - docker run --name day-by-day scwood/day-by-day
-  # - docker ps | grep -q day-by-day
+  - docker build -t scwood/day-by-day .
+  - docker run --name day-by-day scwood/day-by-day
+  - docker ps | grep -q day-by-day
 after_success:
   - docker login -u=$DOCKER_HUB_USERNAME -p=$DOCKER_HUB_PASSWORD
   - docker push scwood/day-by-day
