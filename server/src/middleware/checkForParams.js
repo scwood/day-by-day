@@ -1,5 +1,5 @@
 function checkForParams(required) {
-  return function _checkForParams(req, res, next) {
+  return (req, res, next) => {
     const missing = required.filter(param => {
       if (!req.body[param]) {
         return true;
