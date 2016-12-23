@@ -13,7 +13,7 @@ env:
 script:
   - npm test
   - docker build -t scwood/day-by-day .
-after_success:
   - docker login -u=$DOCKER_HUB_USERNAME -p=$DOCKER_HUB_PASSWORD
   - docker push scwood/day-by-day
+after_success:
   - curl -X POST http://deploy.spncrwd.com/day-by-day
