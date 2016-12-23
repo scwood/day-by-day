@@ -10,11 +10,12 @@ env:
     - MONGO_HOST=localhost
     - EMAIL_ADDRESS=noreply.daybyday@gmail.com
     - EMAIL_HOST=smtp.gmail.com  
-    - secure: "P1PBw/yyvTTAX5NwzV6/nZM9LQrTJeLa2O0ZQjQbBJGLawg0vkUJlmpBlfGAl/3HPmipsfVlGzHltbG7Hhb1yzrdiiX0X+2/pSkgAIZIMHLdGnUeGwxSKt6HoxIgYcELNKI8JbXXyjkOiHZrpM4hDANt75/PHBrGuB6tVtItgwd8gPpi4D+zddeBgp4ScwoMkSliVil9xKy+KvCx5bqwU2fKJn4SSPJI/Du3Sj7c5Z1o3liv5Gkdvaw/MJnFE/zCvsYjKhNUOBkuRqPeViBMotNh8ePl2FXWfewD5cfattHTikTs/vMfVXQLnEq4xA1biJb/Uw/vtm92Z596DnW2SyI0VNtR4ogqwviIvfmj5wjyiSMQcNAaGG2wYzdo1awsz6CBD8vSL3o1AgIuZf0TMUISIMIExibhA7yKBeiIJDCz/sVnla+4ByLLCAZOb4zv+9inQFrFXTfZf4lDK4ICs2WLdf11qqfMYiQp8z2DVJFENqNgBVncpNDgwBDLSc8KrAW64MqY7TFMjcXHqrh0P5UCBxoCfyDQPXIJoP48PbBZkU8cDAkLehwBA2FcItPCKX6PLtgwowc2SdhUaG4ERnSC5N+nshoWzeud6pAA6JWh5MtX0WZH5GckzylZdAS6QC6F4QkQPDnfEzUx+gpi0kpaVp9+ziVPnFmA/8MwGEw="
 script:
   - npm test
-  - docker build -t scwood/day-by-day .
-  - docker run --name scwood/day-by-day
-  - docker ps | grep -q day-by-day
+  # - docker build -t scwood/day-by-day .
+  # - docker run --name day-by-day scwood/day-by-day
+  # - docker ps | grep -q day-by-day
 after_success:
+  - docker login -u=$DOCKER_HUB_USERNAME -p=$DOCKER_HUB_PASSWORD
+  - docker push scwood/day-by-day
   - curl -X POST http://deploy.spncrwd.com/day-by-day
