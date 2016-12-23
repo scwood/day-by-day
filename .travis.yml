@@ -10,7 +10,6 @@ env:
     - EMAIL_ADDRESS=noreply.daybyday@gmail.com
     - EMAIL_HOST=smtp.gmail.com  
 script:
-  # - npm test
-  # - docker build -t scwood/day-by-day .
-  # - docker 
+  - npm test
+  - docker build -t scwood/day-by-day .
   - docker ps | grep -q day-by-day
