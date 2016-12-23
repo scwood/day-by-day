@@ -4,6 +4,10 @@ services:
   - mongodb
 language: node_js
 node_js: 6
-# env:
-#   - MONGO_HOST=localhost
-#   - EMAIL_ADDRESS=test@email.com
+env:
+  - MONGO_HOST=localhost
+  - EMAIL_ADDRESS=noreply.daybyday@gmail.com
+  - EMAIL_HOST=smtp.gmail.com  
+script:
+  - echo $TESTVAR
+  - echo $MONGO_HOST
