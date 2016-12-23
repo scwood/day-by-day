@@ -42,7 +42,7 @@ describe('Auth routes', () => {
           supertest(app)
             .post(tokensUri)
             .send(testUser)
-            .expect(200, done);
+            .expect(201, done);
         });
     });
   });
@@ -50,7 +50,7 @@ describe('Auth routes', () => {
   describe(`POST ${signUpEmailUri}`, () => {
     before(() => {
       sinon.stub(nodemailer, 'createTransport', () => {
-        const transporter = { sendMail: options => Promise.resolve() };
+        const transporter = { sendMail: () => Promise.resolve() };
         return transporter;
       });
     });
@@ -69,7 +69,7 @@ describe('Auth routes', () => {
       supertest(app)
         .post(signUpEmailUri)
         .send(testUser)
-        .expect(200, done);
+        .expect(201, done);
     });
 
     it('should 403 with correct body but existing user', done => {

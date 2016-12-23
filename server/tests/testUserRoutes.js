@@ -32,11 +32,11 @@ describe('User routes', () => {
         .expect(400, done);
     });
 
-    it('should 200 on valid token', done => {
+    it('should 201 on valid token', done => {
       supertest(app)
         .post(usersUri)
         .send({ token: validToken })
-        .expect(200, done);
+        .expect(201, done);
     });
 
     it('should 403 on valid token but existing user', done => {
