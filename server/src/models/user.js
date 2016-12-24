@@ -6,7 +6,7 @@ const UserSchema = new mongoose.Schema({
   password: String,
   emailSchedule: String,
   entries: [{
-    date: Date,
+    date: String,
     text: String,
   }],
 });

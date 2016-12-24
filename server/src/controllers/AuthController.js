@@ -15,7 +15,10 @@ class AuthController {
         res.status(401).send({ error: 'Incorrect email/password combination' });
         return;
       }
-      const token = jwt.sign({ email }, config.secret);
+      const token = jwt.sign({
+        tokenType: 'authorization',
+        email
+      }, config.secret);
       res.status(201).send({ data: { token } });
     } catch (error) {
       next(error);
@@ -36,7 +39,12 @@ class AuthController {
         res.status(400).send({ error: 'Email address is invalid' });
         return;
       }
-      const token = jwt.sign({ email, name, password }, config.secret);
+      const token = jwt.sign({
+        type: 'signUp',
+        email,
+        name,
+        password
+      }, config.secret);
       const link = `${req.protocol}://${req.get('host')}/emailConfirmed` +
         `?token=${token}`;
       const transporter = nodemailer.createTransport(config.nodemailer);
@@ -46,7 +54,7 @@ class AuthController {
         subject: 'Day by Day email confirmation',
         text: `Click the link below to confirm your email:\n${link}`,
       });
-      res.status(201).send({ success: true });
+      res.status(201).send({ data: { success: true } });
     } catch (error) {
       next(error);
     }

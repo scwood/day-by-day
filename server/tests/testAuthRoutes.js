@@ -17,71 +17,77 @@ const testUser = {
   password: 'somepassword',
 };
 
-const validToken = jwt.sign(testUser, config.secret);
+const signUpToken = jwt.sign({
+  tokenType: 'signUp',
+  ...testUser
+}, config.secret);
 
 describe('Auth routes', () => {
-  describe(`POST ${tokensUri}`, () => {
-    it('should 400 with missing body', done => {
-      supertest(app)
-        .post(tokensUri)
-        .expect(400, done);
-    });
-
-    it('should 401 with correct body but incorrect credentials', done => {
-      supertest(app)
-        .post(tokensUri)
-        .send(testUser)
-        .expect(401, done);
-    });
-
-    it('should 200 with correct credentials', done => {
-      supertest(app)
-        .post(usersUri)
-        .send({ token: validToken })
-        .end(() => {
-          supertest(app)
-            .post(tokensUri)
-            .send(testUser)
-            .expect(201, done);
-        });
-    });
-  });
-
-  describe(`POST ${signUpEmailUri}`, () => {
-    before(() => {
-      sinon.stub(nodemailer, 'createTransport', () => {
-        const transporter = { sendMail: () => Promise.resolve() };
-        return transporter;
-      });
-    });
-
-    after(() => {
-      nodemailer.createTransport.restore();
-    });
-
-    it('should 400 with missing body', done => {
-      supertest(app)
-        .post(signUpEmailUri)
-        .expect(400, done);
-    });
-
-    it('should 200 with correct body', done => {
-      supertest(app)
-        .post(signUpEmailUri)
-        .send(testUser)
-        .expect(201, done);
-    });
-
-    it('should 403 with correct body but existing user', done => {
-      supertest(app)
-        .post(usersUri)
-        .send({ token: validToken })
-        .end(() => {
-          supertest(app)
-            .post(signUpEmailUri)
-            .send(testUser)
-            .expect(403, done);
-        });
-    });
-  });
+  describe(`POST ${tokensUri}`, testPostToken);
+  describe(`POST ${signUpEmailUri}`, testPostSignUpEmail);
 });
+
+function testPostToken() {
+  it('should 400 with missing body', done => {
+    supertest(app)
+      .post(tokensUri)
+      .expect(400, done);
+  });
+
+  it('should 401 with correct body but incorrect credentials', done => {
+    supertest(app)
+      .post(tokensUri)
+      .send(testUser)
+      .expect(401, done);
+  });
+
+  it('should 200 with correct credentials', done => {
+    supertest(app)
+      .post(usersUri)
+      .send({ token: signUpToken })
+      .end(() => {
+        supertest(app)
+          .post(tokensUri)
+          .send(testUser)
+          .expect(201, done);
+      });
+  });
+}
+
+function testPostSignUpEmail() {
+  before(() => {
+    sinon.stub(nodemailer, 'createTransport', () => {
+      const transporter = { sendMail: () => Promise.resolve() };
+      return transporter;
+    });
+  });
+
+  after(() => {
+    nodemailer.createTransport.restore();
+  });
+
+  it('should 400 with missing body', done => {
+    supertest(app)
+      .post(signUpEmailUri)
+      .expect(400, done);
+  });
+
+  it('should 200 with correct body', done => {
+    supertest(app)
+      .post(signUpEmailUri)
+      .send(testUser)
+      .expect(201, done);
+  });
+
+  it('should 403 with correct body but existing user', done => {
+    supertest(app)
+      .post(usersUri)
+      .send({ token: signUpToken })
+      .end(() => {
+        supertest(app)
+          .post(signUpEmailUri)
+          .send(testUser)
+          .expect(403, done);
+      });
+  });
+}

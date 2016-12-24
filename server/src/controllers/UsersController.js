@@ -6,11 +6,6 @@ import config from '../config';
 class UsersController {
 
   async postUser(req, res, next) {
-
-    function notifyInvalidToken() {
-      res.status(400).send({ error: 'Invalid token' });
-    }
-
     const { token } = req.body;
     let decoded;
     try {
@@ -21,43 +16,32 @@ class UsersController {
     }
     const requiredKeys = ['email', 'password'];
     const hasRequired = requiredKeys.every(key => key in decoded);
-    if (!hasRequired) {
+    if (decoded.tokenType !== 'signUp' || !hasRequired) {
       notifyInvalidToken();
       return;
     }
+    const { email, name, password } = decoded;
     try {
-      const docs = await User.find({ email: decoded.email });
-      if (docs.length) {
+      const userExists = await User.findOne({ email });
+      if (userExists) {
         res.status(403).send({
-          error: 'User with that email address already exists'
+          error: 'User with that email address already exists',
         });
         return;
       }
-      await User.create({
-        email: decoded.email,
-        name: decoded.name,
-        password: decoded.password,
-      });
-      res.status(201).send({ data: { success: true } });
+      const user = await User.create({ email, name, password });
+      res.status(201).send({ data: { user } });
     } catch (error) {
       next(error);
+    }
+
+    function notifyInvalidToken() {
+      res.status(400).send({ error: 'Invalid token' });
     }
   }
 
-  async getMe(req, res, next) {
-    try {
-      const docs = await User.find({ email: req.email });
-      if (docs.length === 0) {
-        res.status(400).send({ error: 'User not found' });
-        return;
-      }
-      const user = docs[0];
-      res.send({
-        data: { me: user.email },
-      });
-    } catch (error) {
-      next(error);
-    }
+  getMe(req, res) {
+    res.send({ data: { me: req.user.email } });
   }
 
   patchMe(req, res) {

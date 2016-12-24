@@ -1,17 +1,18 @@
 import { Router } from 'express';
 
 import EntriesController from '../controllers/EntriesController';
-import authenticate from '../middleware/authenticate';
+import authorize from '../middleware/authorize';
 import checkForParams from '../middleware/checkForParams';
 
 const controller = new EntriesController();
 const router = new Router();
 
 router.route('/')
-  .get(authenticate, controller.getEntries)
-  .post(authenticate, checkForParams(['date', 'text']), controller.postEntry);
+  .get(authorize, controller.getEntries)
+  .post(authorize, checkForParams(['date', 'text']), controller.postEntry);
 router.route('/:id')
-  .get(authenticate, controller.getEntry)
-  .patch(authenticate, controller.patchEntry);
+  .get(authorize, controller.getEntry)
+  .patch(authorize, controller.patchEntry)
+  .delete(authorize, controller.deleteEntry);
 
 export default router;
