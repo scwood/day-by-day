@@ -10,7 +10,7 @@ class EmailConfirmed extends Component {
     this.state = { error: null };
   }
 
-  async componentWillMount() {
+  async componentDidMount() {
     const { token } = this.props.location.query;
     if (!token) {
       this.setState({ error: 'Missing token' });

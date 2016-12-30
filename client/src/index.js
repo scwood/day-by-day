@@ -2,36 +2,46 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import 'font-awesome/css/font-awesome.css';
 import React from 'react';
-import { browserHistory, Route, Router, Redirect } from 'react-router';
+import { Redirect, Route, Router, browserHistory } from 'react-router';
 import { render } from 'react-dom';
+import { autorun } from 'mobx';
 
-import './index.css';
+import './style.css';
 import Auth from './components/Auth';
-import EmailConfirmed from './components/EmailConfirmed';
+import EmailConfirmed from './containers/EmailConfirmed';
 import EmailSent from './components/EmailSent';
-import Main from './components/Main';
+import Entries from './containers/Entries';
+import Entry from './containers/Entry';
 import Landing from './components/Landing';
-import Login from './components/Login';
-import Register from './components/Register';
+import Login from './containers/Login';
+import Main from './components/Main';
+import Register from './containers/Register';
+import store from './store';
 
-function checkToken(nextState, replace, callback) {
+autorun(() => {
+  if (store.unauthorized) {
+    store.unauthorized = false;
+    localStorage.clear();
+    browserHistory.replace('/landing');
+  }
+});
+
+function checkForToken(nextState, replace, callback) {
   if (localStorage.getItem('token') !== null) {
     replace('/');
   }
   callback();
 }
 
-function logout(nextState, replace, callback) {
-  localStorage.clear();
-  replace('/landing');
-  callback();
-}
-
 const routes = (
   <Router history={browserHistory} >
-    <Route path="/" component={Main} />
-    <Route path="/logout" onEnter={logout}/>
-    <Route onEnter={checkToken}>
+    <Route component={Main}>
+      <Route path="/entries" component={Entries} />
+      <Route path="/entries/:id" component={Entry} />
+      <Route path="/newEntry" component={Entry} />
+      <Route path="/settings" component={() => <div>Settings</div>} />
+    </Route>
+    <Route onEnter={checkForToken}>
       <Route path="/landing" component={Landing} />
       <Route component={Auth}>
         <Route path="/login" component={Login} />
@@ -40,7 +50,7 @@ const routes = (
         <Route path="/emailConfirmed" component={EmailConfirmed} />
       </Route>
     </Route>
-    <Redirect from="*" to="/" />
+    <Redirect from="*" to="/entries" />
   </Router>
 );
 

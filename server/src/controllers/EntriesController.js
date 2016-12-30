@@ -3,7 +3,11 @@ import moment from 'moment';
 class EntriesController {
 
   getEntries(req, res) {
-    const entries = req.user.entries.map(({ _id, date }) => ({ _id, date }));
+    const entries = req.user.entries.map(({ _id, date }) => {
+      return { _id, date };
+    }).sort((a, b) => {
+      return new Date(a) - new Date(b);
+    });
     res.send({ data: { entries }});
   }
 
@@ -24,6 +28,7 @@ class EntriesController {
       res.status(400).send({
         error: 'Date format is invalid, correct format: YYYY-MM-DD'
       });
+      return;
     }
     const { user } = req;
     const entryExists = user.entries.some(entry => entry.date === date);
