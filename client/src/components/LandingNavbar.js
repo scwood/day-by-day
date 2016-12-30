@@ -8,7 +8,7 @@ function LandingNavbar() {
         <i className="fa fa-book"></i> Day by Day
       </Link>
       <button
-        className="navbar-toggler hidden-sm-up pull-right"
+        className="navbar-toggler hidden-sm-up pull-right pointer"
         data-toggle="collapse"
         data-target="#landing-navbar"
       >

@@ -21,7 +21,7 @@ function MainNavbar({ onSignOutClick }) {
         >
           <ul className="nav navbar-nav">
             <li className="nav-item">
-              <Link to="/newEntry" className="nav-link text-success">
+              <Link to="/entries/new" className="nav-link text-success">
                 <i className="fa fa-pencil"></i> New Entry
               </Link>
             </li>
