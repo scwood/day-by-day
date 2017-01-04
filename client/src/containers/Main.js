@@ -19,7 +19,11 @@ class Main extends Component {
       <div>
         <MainNavbar onSignOutClick={this.handleSignOutClick} />;
         <div className="container max-app-width" style={{ marginTop: 60 }}>
-          {this.props.children}
+          <div className="row">
+            <div className="col-xs-12">
+              {this.props.children}
+            </div>
+          </div>
         </div>
       </div>
     );

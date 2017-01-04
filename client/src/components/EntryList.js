@@ -29,7 +29,12 @@ function EntryList({ entries }) {
       result.push(<EntryListYear key={year} year={year} entries={entries}/>);
     });
   }
-  return <div>{result}</div>;
+  return (
+    <div>
+      <h2>Entries</h2>
+      {result}
+    </div>
+  );
 }
 
 EntryList.propTypes = {

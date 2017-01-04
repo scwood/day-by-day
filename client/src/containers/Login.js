@@ -3,6 +3,7 @@ import fetch from 'isomorphic-fetch';
 import { browserHistory } from 'react-router';
 
 import LoginForm from '../components/LoginForm';
+import handleFieldChange from '../utils/handleFieldChange';
 
 class Login extends Component {
 
@@ -13,17 +14,8 @@ class Login extends Component {
       password: '',
       error: null,
     };
-    this.handleEmailChange = this.handleEmailChange.bind(this);
-    this.handlePasswordChange = this.handlePasswordChange.bind(this);
+    this.handleFieldChange = handleFieldChange.bind(this);
     this.handleLoginClick = this.handleLoginClick.bind(this);
-  }
-
-  handleEmailChange(event) {
-    this.setState({ email: event.target.value });
-  }
-
-  handlePasswordChange(event) {
-    this.setState({ password: event.target.value });
   }
 
   async handleLoginClick(event) {
@@ -39,7 +31,7 @@ class Login extends Component {
       if ('error' in json) {
         this.setState({ error: json.error, password: '' });
       } else {
-        localStorage.setItem('token', json.data.token);
+        localStorage.setItem('token', json.token);
         browserHistory.push('/');
       }
     } catch (error) {
@@ -53,8 +45,8 @@ class Login extends Component {
         email={this.state.email}
         password={this.state.password}
         error={this.state.error}
-        onEmailChange={this.handleEmailChange}
-        onPasswordChange={this.handlePasswordChange}
+        onEmailChange={this.handleFieldChange('email')}
+        onPasswordChange={this.handleFieldChange('password')}
         onLoginClick={this.handleLoginClick}
       />
     );

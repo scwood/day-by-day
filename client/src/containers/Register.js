@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import fetch from 'isomorphic-fetch';
 import { browserHistory } from 'react-router'; 
+
 import RegisterForm from '../components/RegisterForm';
+import handleFieldChange from '../utils/handleFieldChange';
 
 class Register extends Component {
 
@@ -12,17 +14,8 @@ class Register extends Component {
       password: '',
       error: null,
     };
-    this.handleEmailChange = this.handleEmailChange.bind(this);
-    this.handlePasswordChange = this.handlePasswordChange.bind(this);
+    this.handleFieldChange = handleFieldChange.bind(this);
     this.handleRegisterClick = this.handleRegisterClick.bind(this);
-  }
-
-  handleEmailChange(event) {
-    this.setState({ email: event.target.value });
-  }
-
-  handlePasswordChange(event) {
-    this.setState({ password: event.target.value });
   }
 
   async handleRegisterClick(event) {
@@ -51,8 +44,8 @@ class Register extends Component {
         email={this.state.email}
         password={this.state.password}
         error={this.state.error}
-        onEmailChange={this.handleEmailChange}
-        onPasswordChange={this.handlePasswordChange}
+        onEmailChange={this.handleFieldChange('email')}
+        onPasswordChange={this.handleFieldChange('password')}
         onRegisterClick={this.handleRegisterClick}
       />
     );

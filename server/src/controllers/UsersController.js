@@ -30,7 +30,7 @@ class UsersController {
         return;
       }
       const user = await User.create({ email, name, password });
-      res.status(201).send({ data: { user } });
+      res.status(201).send({ user });
     } catch (error) {
       next(error);
     }
@@ -41,7 +41,7 @@ class UsersController {
   }
 
   getMe(req, res) {
-    res.send({ data: { me: req.user.email } });
+    res.send({ me: req.user.email });
   }
 
   patchMe(req, res) {

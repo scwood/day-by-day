@@ -12,22 +12,15 @@ class Entries extends Component {
 
   async componentDidMount() {
     this.setState({ isLoading: true });
-    const result = await fetchOrRedirect('/api/entries');
-    this.setState({ entries: result.data.entries, isLoading: false });
+    const { entries } = await fetchOrRedirect('/api/entries');
+    this.setState({ entries, isLoading: false });
   }
 
   render() {
     if (this.state.isLoading) {
       return null;
     }
-    return (
-      <div className="row">
-        <div className="col-xs-12">
-          <h2>Entries</h2>
-          <EntryList entries={this.state.entries} />
-        </div>
-      </div>
-    );
+    return <EntryList entries={this.state.entries} />;
   }
 }
 

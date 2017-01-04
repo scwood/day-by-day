@@ -38,8 +38,6 @@ const routes = (
   </Router>
 );
 
-render(routes, document.getElementById('root'));
-
 function checkForToken(nextState, replace, callback) {
   if (localStorage.getItem('token') !== null) {
     replace('/entries');
@@ -56,3 +54,4 @@ async function authorize(nextState, replace, callback) {
   callback();
 }
 
+render(routes, document.getElementById('root'));

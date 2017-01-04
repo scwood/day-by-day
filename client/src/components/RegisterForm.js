@@ -1,35 +1,39 @@
 import React, { PropTypes } from 'react';
 
-function RegisterForm(props) {
+function RegisterForm({
+  email,
+  password,
+  error,
+  onEmailChange,
+  onPasswordChange,
+  onRegisterClick,
+}) {
   return (
     <form>
-      {props.error
-        ? <div className="alert alert-danger">{props.error}</div>
+      {error
+        ? <div className="alert alert-danger">{error}</div>
         : null }
-      <fieldset className="form-group">
+      <div className="form-group">
         <label>Email</label>
         <input
-          value={props.email}
+          value={email}
           className="form-control"
           placeholder="Enter your email"
-          onChange={props.onEmailChange}
+          onChange={onEmailChange}
         />
-      </fieldset>
-      <fieldset className="form-group">
+      </div>
+      <div className="form-group">
         <label>Password</label>
         <input
-          value={props.password}
+          value={password}
           type="password"
           className="form-control"
           placeholder="Choose a password"
-          onChange={props.onPasswordChange}
+          onChange={onPasswordChange}
         />
-      </fieldset>
+      </div>
       <hr />
-      <button
-        className="btn btn-success btn-block"
-        onClick={props.onRegisterClick}
-      >
+      <button className="btn btn-success btn-block" onClick={onRegisterClick}>
         Sign up for Day by Day
       </button>
     </form>

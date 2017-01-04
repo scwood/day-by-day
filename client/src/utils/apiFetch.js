@@ -1,9 +1,6 @@
 import fetch from 'isomorphic-fetch';
 
-async function apiFetch(url, config) {
-  if (!config) {
-    config = {};
-  }
+async function apiFetch(url, config = {}) {
   if (!config.headers) {
     config.headers = {};
   }

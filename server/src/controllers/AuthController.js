@@ -19,7 +19,7 @@ class AuthController {
         tokenType: 'authorization',
         email
       }, config.secret);
-      res.status(201).send({ data: { token } });
+      res.status(201).send({ token });
     } catch (error) {
       next(error);
     }
@@ -54,7 +54,7 @@ class AuthController {
         subject: 'Day by Day email confirmation',
         text: `Click the link below to confirm your email:\n${link}`,
       });
-      res.status(201).send({ data: { success: true } });
+      res.status(201).send({ success: true });
     } catch (error) {
       next(error);
     }

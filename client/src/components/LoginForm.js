@@ -2,12 +2,17 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 
 function LoginForm({
-  email, password, error, onEmailChange, onPasswordChange, onLoginClick
+  email,
+  password,
+  error,
+  onEmailChange,
+  onPasswordChange,
+  onLoginClick,
 }) {
   return (
     <form>
       {error && <div className="alert alert-danger">{error}</div>}
-      <fieldset className="form-group">
+      <div className="form-group">
         <label>Email</label>
         <input
           className="form-control form-control-danger"
@@ -15,8 +20,8 @@ function LoginForm({
           value={email}
           onChange={onEmailChange}
         />
-      </fieldset>
-      <fieldset className="form-group">
+      </div>
+      <div className="form-group">
         <label>Password</label>
         <input
           type="password"
@@ -25,7 +30,7 @@ function LoginForm({
           value={password}
           onChange={onPasswordChange}
         />
-      </fieldset>
+      </div>
       <hr />
       <button className="btn btn-success btn-block" onClick={onLoginClick}>
         Sign in

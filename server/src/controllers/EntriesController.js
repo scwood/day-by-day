@@ -8,7 +8,7 @@ class EntriesController {
     }).sort((a, b) => {
       return new Date(a) - new Date(b);
     });
-    res.send({ data: { entries }});
+    res.send({ entries });
   }
 
   getEntry(req, res) {
@@ -19,7 +19,7 @@ class EntriesController {
       res.status(404).send({ error: 'Entry with that id does not exist' });
       return;
     }
-    res.send({ data: { entry }});
+    res.send({ entry });
   }
 
   postEntry(req, res) {
@@ -38,9 +38,7 @@ class EntriesController {
     }
     user.entries.push({ date, text });
     user.save();
-    res.status(201).send({
-      data: { entry: user.entries[user.entries.length - 1] },
-    });
+    res.status(201).send({ entry: user.entries[user.entries.length - 1] });
   }
 
   patchEntry(req, res) {
@@ -58,7 +56,7 @@ class EntriesController {
     }
     user.entries.splice(index, 1);
     user.save();
-    res.send({ data: { success: true } });
+    res.send({ success: true } );
   }
 }
 
