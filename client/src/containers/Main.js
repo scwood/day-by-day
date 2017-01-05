@@ -10,6 +10,14 @@ class Main extends Component {
     this.handleSignOutClick = this.handleSignOutClick.bind(this);
   }
 
+  componentDidMount() {
+    // need to use jQuery here to toggle the navbar on mobile, not pretty
+    // but it gets the job done
+    window.$('nav a').on('click', () => {
+      window.$('#main-navbar').collapse('hide');
+    });
+  }
+
   handleSignOutClick() {
     signOut();
   }

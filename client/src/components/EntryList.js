@@ -31,7 +31,7 @@ function EntryList({ entries }) {
   }
   return (
     <div>
-      <h2>Entries</h2>
+      <h2 className="mb-1">Entries</h2>
       {result}
     </div>
   );

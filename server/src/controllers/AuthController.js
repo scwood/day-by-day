@@ -10,14 +10,14 @@ class AuthController {
   async postToken(req, res, next) {
     const { email, password } = req.body;
     try {
-      const user = await User.findOne({ email });
+      const user = await User.findOne({ email: email.toLowerCase() });
       if (!user || !user.comparePassword(password)) {
         res.status(401).send({ error: 'Incorrect email/password combination' });
         return;
       }
       const token = jwt.sign({
         tokenType: 'authorization',
-        email
+        email: email.toLowerCase(),
       }, config.secret);
       res.status(201).send({ token });
     } catch (error) {

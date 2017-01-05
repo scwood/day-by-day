@@ -5,6 +5,7 @@ import React from 'react';
 import { Redirect, Route, Router, browserHistory } from 'react-router';
 import { render } from 'react-dom';
 
+
 import './index.css';
 import Auth from './components/Auth';
 import EmailConfirmed from './containers/EmailConfirmed';

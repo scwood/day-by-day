@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { browserHistory } from 'react-router';
 
 import EntryEditor from '../components/EntryEditor';
 import fetchOrRedirect from '../utils/fetchOrRedirect';
@@ -29,12 +30,18 @@ class Entry extends Component {
     }
   }
 
-  handleSubmitClick() {
+  handleSubmitClick(event) {
+    event.preventDefault();
     console.log('submitted');
   }
 
-  handleDeleteClick() {
-    console.log('deleted');
+  async handleDeleteClick(event) {
+    event.preventDefault();
+    const { id } = this.props.params;
+    if (id !== undefined) {
+      await fetchOrRedirect(`/api/entries/${id}`, { method: 'delete' });
+    }
+    browserHistory.replace('/entries');
   }
 
   render() {
