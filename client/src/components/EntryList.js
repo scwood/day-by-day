@@ -9,10 +9,9 @@ function EntryList({ entries }) {
   if (entries.length === 0) {
     result = (
       <div>
-        Looks like you haven't written any journal entries yet.
-        Respond to one of the
-        <Link to="/settings"> automated emails</Link> or
-        <Link to="/entries/new"> click hear to write one now</Link>.
+        It looks like you haven't written any journal entries yet.  Respond
+        to one of the <Link to="/settings"> automated emails</Link> or
+        <Link to="/entries/new"> click here to write one now</Link>.
       </div>
     );
   } else {

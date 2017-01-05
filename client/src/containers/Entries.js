@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import EntryList from '../components/EntryList';
-import fetchOrRedirect from '../utils/fetchOrRedirect';
+import api from '../utils/api';
 
 class Entries extends Component {
 
@@ -12,7 +12,7 @@ class Entries extends Component {
 
   async componentDidMount() {
     this.setState({ isLoading: true });
-    const { entries } = await fetchOrRedirect('/api/entries');
+    const { entries } = await api.getEntries();
     this.setState({ entries, isLoading: false });
   }
 

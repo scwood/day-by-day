@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 
 function EntryEditor({
   error,
+  success,
   date,
   text,
   onDateChange,
@@ -11,15 +12,14 @@ function EntryEditor({
 }) {
   return (
     <form>
-      {error
-        ? <div className="alert alert-danger">{error}</div>
-        : null }
+      {success && <div className="alert alert-success">{success}</div>}
+      {error && <div className="alert alert-danger">{error}</div>}
       <div className="form-group">
         <label>Date</label>
         <input
           value={date}
+          placeholder="YYYY-MM-DDD"
           className="form-control"
-          placeholder="Enter your email"
           onChange={onDateChange}
         />
       </div>
@@ -27,6 +27,7 @@ function EntryEditor({
         <label>Text</label>
         <textarea
           value={text}
+          placeholder="Walked the dog..."
           className="form-control"
           rows="4"
           onChange={onTextChange}
@@ -50,6 +51,7 @@ function EntryEditor({
 
 EntryEditor.propTypes = {
   error: PropTypes.string,
+  success: PropTypes.string,
   date: PropTypes.string,
   text: PropTypes.string,
   onDateChange: PropTypes.func.isRequired,

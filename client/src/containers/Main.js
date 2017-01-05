@@ -11,8 +11,8 @@ class Main extends Component {
   }
 
   componentDidMount() {
-    // need to use jQuery here to toggle the navbar on mobile, not pretty
-    // but it gets the job done
+    // need to use jQuery here to toggle the navbar when a link is clicked on
+    // mobile, not pretty but it works
     window.$('nav a').on('click', () => {
       window.$('#main-navbar').collapse('hide');
     });
@@ -26,7 +26,7 @@ class Main extends Component {
     return (
       <div>
         <MainNavbar onSignOutClick={this.handleSignOutClick} />;
-        <div className="container max-app-width" style={{ marginTop: 60 }}>
+        <div className="container max-app-width mb-3" style={{ marginTop: 60 }}>
           <div className="row">
             <div className="col-xs-12">
               {this.props.children}

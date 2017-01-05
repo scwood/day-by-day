@@ -5,7 +5,6 @@ import React from 'react';
 import { Redirect, Route, Router, browserHistory } from 'react-router';
 import { render } from 'react-dom';
 
-
 import './index.css';
 import Auth from './components/Auth';
 import EmailConfirmed from './containers/EmailConfirmed';
@@ -16,7 +15,7 @@ import Landing from './components/Landing';
 import Login from './containers/Login';
 import Main from './containers/Main';
 import Register from './containers/Register';
-import apiFetch from './utils/apiFetch';
+import api from './utils/api';
 
 const routes = (
   <Router history={browserHistory} >
@@ -47,8 +46,7 @@ function checkForToken(nextState, replace, callback) {
 }
 
 async function authorize(nextState, replace, callback) {
-  const result = await apiFetch('/api/users/me');
-  if (result.status === 401) {
+  if (!(await api.isAuthenticated())) {
     localStorage.clear();
     replace('/landing');
   }

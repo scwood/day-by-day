@@ -10,9 +10,7 @@ function RegisterForm({
 }) {
   return (
     <form>
-      {error
-        ? <div className="alert alert-danger">{error}</div>
-        : null }
+      {error && <div className="alert alert-danger">{error}</div>}
       <div className="form-group">
         <label>Email</label>
         <input
