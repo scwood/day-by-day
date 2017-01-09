@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import fetch from 'isomorphic-fetch';
 
-import EmailConfirmedMessage from '../components/EmailConfirmedMessage';
+import EmailConfirmedMessage from './EmailConfirmedMessage';
 
 class EmailConfirmed extends Component {
 

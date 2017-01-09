@@ -1,53 +1,47 @@
 import React, { PropTypes } from 'react';
-import { Link } from 'react-router';
 
-function LoginForm({
+function RegisterForm({
   email,
   password,
-  error,
   onEmailChange,
   onPasswordChange,
-  onLoginClick,
+  onRegisterClick,
 }) {
   return (
     <form>
-      {error && <div className="alert alert-danger">{error}</div>}
       <div className="form-group">
         <label>Email</label>
         <input
-          className="form-control form-control-danger"
-          placeholder="Enter your email"
           value={email}
+          className="form-control"
+          placeholder="Enter your email"
           onChange={onEmailChange}
         />
       </div>
       <div className="form-group">
         <label>Password</label>
         <input
+          value={password}
           type="password"
           className="form-control"
-          placeholder="Enter your password"
-          value={password}
+          placeholder="Choose a password"
           onChange={onPasswordChange}
         />
       </div>
       <hr />
-      <button className="btn btn-success btn-block" onClick={onLoginClick}>
-        Sign in
+      <button className="btn btn-success btn-block" onClick={onRegisterClick}>
+        Sign up for Day by Day
       </button>
-      <hr />
-      Need an account? <Link to="/register">Click here to create one.</Link>
     </form>
   );
 }
 
-LoginForm.propTypes = {
+RegisterForm.propTypes = {
   email: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired,
-  error: PropTypes.string,
   onEmailChange: PropTypes.func.isRequired,
   onPasswordChange: PropTypes.func.isRequired,
-  onLoginClick: PropTypes.func.isRequired,
+  onRegisterClick: PropTypes.func.isRequired,
 };
 
-export default LoginForm;
+export default RegisterForm;

@@ -1,8 +1,8 @@
 function handleFieldChange(field) {
   return (event) => {
-    const state = {};
-    state[field] = event.target.value;
-    this.setState(state);
+    const newState = {};
+    newState[field] = event.target.value;
+    this.setState(newState);
   };
 }
 

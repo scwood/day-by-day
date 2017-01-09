@@ -2,9 +2,11 @@ import React, { Component, PropTypes } from 'react';
 import autobind from 'class-autobind';
 import { browserHistory } from 'react-router';
 
-import EntryEditor from '../components/EntryEditor';
-import api from '../utils/api';
-import handleFieldChange from '../utils/handleFieldChange';
+import EntryEditor from './EntryEditor';
+import ErrorAlert from '../ErrorAlert';
+import SuccessAlert from '../SuccessAlert';
+import api from '../../utils/api';
+import handleFieldChange from '../../utils/handleFieldChange';
 
 class Entry extends Component { 
 
@@ -55,7 +57,6 @@ class Entry extends Component {
     } else {
       newState.error = null;
     }
-    console.log(newState);
     this.setState(newState);
   }
 
@@ -73,16 +74,18 @@ class Entry extends Component {
       return null;
     }
     return (
-      <EntryEditor
-        error={this.state.error}
-        success={this.state.success}
-        date={this.state.date}
-        text={this.state.text}
-        onDateChange={this.handleFieldChange('date')}
-        onTextChange={this.handleFieldChange('text')}
-        onSubmitClick={this.handleSubmitClick}
-        onDeleteClick={this.handleDeleteClick}
-      />
+      <div>
+        {this.state.error && <ErrorAlert message={this.state.error} />}
+        {this.state.success && <SuccessAlert message={this.state.success} />}
+        <EntryEditor
+          date={this.state.date}
+          text={this.state.text}
+          onDateChange={this.handleFieldChange('date')}
+          onTextChange={this.handleFieldChange('text')}
+          onSubmitClick={this.handleSubmitClick}
+          onDeleteClick={this.handleDeleteClick}
+        />
+      </div>
     );
   }
 }

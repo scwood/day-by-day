@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import EntryList from '../components/EntryList';
-import api from '../utils/api';
+import EntryList from './EntryList';
+import api from '../../utils/api';
 
 class Entries extends Component {
 

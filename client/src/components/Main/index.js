@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
-import MainNavbar from '../components/MainNavbar';
-import signOut from '../utils/signOut';
+import MainNavbar from './MainNavbar';
+import signOut from '../../utils/signOut';
 
 class Main extends Component {
 

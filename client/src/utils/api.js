@@ -8,6 +8,22 @@ class ApiClient {
     autobind(this);
   }
 
+  async getToken(email, password) {
+    return await this.fetchJson('/api/auth/tokens', {
+      method: 'post',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ email, password }),
+    });
+  }
+
+  async postSignUpEmail(email, password) {
+    return await this.fetchJson('/api/auth/signUpEmail', {
+      method: 'post',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ email, password }),
+    });
+  }
+
   async isAuthenticated() {
     const result = await this.fetchWithToken('/api/users/me');
     return result.status === 200;
@@ -34,7 +50,7 @@ class ApiClient {
       body: JSON.stringify(entry),
     });
   }
-  
+
   async postEntry(entry) {
     return await this.fetchJsonOrRedirect('/api/entries', {
       method: 'post',
@@ -42,7 +58,7 @@ class ApiClient {
       body: JSON.stringify(entry),
     });
   }
-  
+
   async fetchWithToken(url, config = {}) {
     if (!config.headers) {
       config.headers = {};
@@ -56,6 +72,11 @@ class ApiClient {
     if (result.status === 401) {
       browserHistory.replace('/landing');
     }
+    return await result.json();
+  }
+
+  async fetchJson(...args) {
+    const result = await fetch(...args);
     return await result.json();
   }
 }

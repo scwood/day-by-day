@@ -6,15 +6,15 @@ import { Redirect, Route, Router, browserHistory } from 'react-router';
 import { render } from 'react-dom';
 
 import './index.css';
-import Auth from './components/Auth';
-import EmailConfirmed from './containers/EmailConfirmed';
+import AuthWrapper from './components/AuthWrapper';
+import EmailConfirmed from './components/EmailConfirmed';
 import EmailSent from './components/EmailSent';
-import Entries from './containers/Entries';
-import Entry from './containers/Entry';
+import Entries from './components/Entries';
+import Entry from './components/Entry';
 import Landing from './components/Landing';
-import Login from './containers/Login';
-import Main from './containers/Main';
-import Register from './containers/Register';
+import Login from './components/Login';
+import Main from './components/Main';
+import Register from './components/Register';
 import api from './utils/api';
 
 const routes = (
@@ -27,7 +27,7 @@ const routes = (
     </Route>
     <Route onEnter={checkForToken}>
       <Route path="/landing" component={Landing} />
-      <Route component={Auth}>
+      <Route component={AuthWrapper}>
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
         <Route path="/emailSent" component={EmailSent} />

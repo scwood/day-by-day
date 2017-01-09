@@ -1,7 +1,7 @@
 import { Link } from 'react-router';
 import React, { PropTypes } from 'react';
 
-function Auth(props) {
+function AuthWrapper(props) {
   return (
     <div className="container mt-3" style={{ maxWidth: 400 }}>
       <h3 style={{ fontWeight: 'normal' }}>
@@ -15,8 +15,8 @@ function Auth(props) {
   );
 }
 
-Auth.propTypes = {
+AuthWrapper.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export default Auth;
+export default AuthWrapper;

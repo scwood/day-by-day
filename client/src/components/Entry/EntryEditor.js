@@ -1,8 +1,6 @@
 import React, { PropTypes } from 'react';
 
 function EntryEditor({
-  error,
-  success,
   date,
   text,
   onDateChange,
@@ -12,13 +10,11 @@ function EntryEditor({
 }) {
   return (
     <form>
-      {success && <div className="alert alert-success">{success}</div>}
-      {error && <div className="alert alert-danger">{error}</div>}
       <div className="form-group">
         <label>Date</label>
         <input
           value={date}
-          placeholder="YYYY-MM-DDD"
+          placeholder="YYYY-MM-DD"
           className="form-control"
           onChange={onDateChange}
         />
@@ -50,8 +46,6 @@ function EntryEditor({
 }
 
 EntryEditor.propTypes = {
-  error: PropTypes.string,
-  success: PropTypes.string,
   date: PropTypes.string,
   text: PropTypes.string,
   onDateChange: PropTypes.func.isRequired,
