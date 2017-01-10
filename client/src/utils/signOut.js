@@ -2,7 +2,7 @@ import { browserHistory } from 'react-router';
 
 function signOut() {
   localStorage.clear();
-  browserHistory.replace('/landing');
+  browserHistory.replace('/');
 }
 
 export default signOut;

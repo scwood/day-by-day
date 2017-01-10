@@ -5,7 +5,7 @@ function AuthWrapper(props) {
   return (
     <div className="container mt-3" style={{ maxWidth: 400 }}>
       <h3 style={{ fontWeight: 'normal' }}>
-        <Link to="/landing" className="dark-link">
+        <Link to="/" className="dark-link">
           <i className="fa fa-book"></i> Day by Day
         </Link>
       </h3>

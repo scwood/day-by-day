@@ -70,7 +70,7 @@ class ApiClient {
   async fetchJsonOrRedirect(...args) {
     const result = await this.fetchWithToken(...args);
     if (result.status === 401) {
-      browserHistory.replace('/landing');
+      browserHistory.replace('/');
     }
     return await result.json();
   }

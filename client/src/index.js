@@ -26,7 +26,7 @@ const routes = (
       <Route path="/settings" component={() => <div>settings</div>} />
     </Route>
     <Route onEnter={checkForToken}>
-      <Route path="/landing" component={Landing} />
+      <Route path="/" component={Landing} />
       <Route component={AuthWrapper}>
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
@@ -48,7 +48,7 @@ function checkForToken(nextState, replace, callback) {
 async function authorize(nextState, replace, callback) {
   if (!(await api.isAuthenticated())) {
     localStorage.clear();
-    replace('/landing');
+    replace('/');
   }
   callback();
 }
