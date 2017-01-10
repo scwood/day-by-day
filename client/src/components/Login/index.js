@@ -27,7 +27,7 @@ class Login extends Component {
       this.setState({ error: result.error, password: '' });
     } else {
       localStorage.setItem('token', result.token);
-      browserHistory.push('/');
+      browserHistory.push('/entries');
     }
   }
 
